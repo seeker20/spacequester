@@ -1,0 +1,147 @@
+body,td,th {
+	color: #FFFFFF;
+}
+body {
+	background-color: 	#000099;
+  scrollbar-face-color: #00184A;
+  scrollbar-track-color: #08296B;
+  scrollbar-arrow-color: #FF0000;
+  scrollbar-highlight-color: #083194;
+  scrollbar-shadow-color: #082984;
+  scrollbar-3dlight-color: #6373B5;
+  scrollbar-darkshadow-color: #000000;
+  overflow: auto;
+}
+a:link {
+	color: #9EBDE4;
+}
+a:visited {
+	color: #6699CC;
+}
+a:hover {
+	color: #FFFFCC
+}
+
+h1 {
+	color: #FF3300;
+}
+h2 {
+	color: #CC3300;
+}
+
+#menue{
+	width:14%;
+	line-height:18px;
+	float:left;
+}
+#main {
+	float:left;
+	width:76%;
+	margin-left:3%;
+}
+
+
+#navcontainer { width: 90%; }
+#navcontainer ul
+{
+	margin-left: 0;
+	padding-left: 0;
+	list-style-type: none;
+}
+#navcontainer a
+{
+	display: block;
+	padding: 3px;
+	width: 80%;
+	background-color: #000066;
+	text-decoration: none;
+}
+#navcontainer a:link, .navlist a:visited
+{
+	color: #EEE;
+	text-decoration: none;
+}
+#navcontainer a:hover
+{
+	background-color: #369;
+	color: #fff;
+}
+
+#abgerundedeecken
+{
+	font-size:12px;font-family:Verdana;
+	background-color:#000066;
+	border:1px solid #000066;
+	left:200px;top:50px;
+	-moz-border-radius:10px;
+	height:84%;
+	overflow: auto;
+}
+#abgerundedeecken1
+{
+	font-size:12px;font-family:Verdana;
+	background-color:#000066;
+	border:1px solid #000066;
+	left:200px;top:50px;
+	-moz-border-radius:10px;
+	height:12%;
+}
+#abgerundedeecken2
+{
+	font-size:12px;font-family:Verdana;
+	background-color:#000033;
+	border:1px solid #000033;
+	left:200px;top:50px;
+	-moz-border-radius:10px;
+	width:40%;
+}
+#abgerundedeecken3
+{
+	font-size:12px;font-family:Verdana;
+	background-color:#000099;
+	border:1px solid #000099;
+	left:200px;top:50px;
+	-moz-border-radius:10px;
+	width:95%;
+	height:65%;
+}
+#abgerundedeecken4
+{
+	font-size:12px;font-family:Verdana;
+	background-color:#000099;
+	border:1px solid #000099;
+	left:200px;top:50px;
+	-moz-border-radius:10px;
+	width:95%;
+	height:25%;
+}
+#abgerundedeecken5
+{
+	font-size:12px;font-family:Verdana;
+	background-color:#000099;
+	border:1px solid #000099;
+	left:200px;top:50px;
+	-moz-border-radius:10px;
+	width:95%;
+	height:95%;
+}
+#abgerundedeecken6
+{
+	font-size:12px;font-family:Verdana;
+	background-color:#000099;
+	border:1px solid #000099;
+	left:200px;top:50px;
+	-moz-border-radius:10px;
+	width:90%;
+}
+
+
+.smallborder {
+	border-bottom: solid 1px #000000; 
+	border-right: solid 1px #000000;
+}
+
+.hsmallborder {
+	border-top: solid 1px #000000; 
+	border-left: solid 1px #000000;
+}
