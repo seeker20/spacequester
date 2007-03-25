@@ -13,8 +13,9 @@ else
 	echo "<h3>Message</h3>";
 	echo "<p>W&auml;hlen sie einfach eine Funktion. Hier k&ouml;nnen sie Messages schreiben Ihre Messages lesen";
 	echo " Bitte beachten sie das es nicht gestatet ist ilegale aktivit&auml;ten zu Planen";
-	echo " Mit der benutztung dieses Sytsemes stimmen si automatisch zu das sie die verantwortung";
+	echo " Mit der benutztung dieses Sytsemes stimmen Sie automatisch zu das sie die verantwortung";
 	echo " f&uuml;r die anchrichten &Uuml;bernhemen.</p>";
+	echo "<img src=../daten/bilder/server.png width=100 height=100>";
 }
 if($action == "wichtig")
 {
@@ -319,7 +320,7 @@ if($action == "write_mail")
 		$err = true;
 	}
 	
-	$sqlab = "select * from mail where absender='" . $whoami . "' and empfaenger='" . $empfaenger . "' and titel='" . $betref . "' and text='" . $text . "'";
+	$sqlab = "select * from mail where absender='" .mysql_real_escape_string($whoami) . "' and empfaenger='" . mysql_real_escape_string($empfaenger) . "' and titel='" . mysql_real_escape_string($betref) . "' and text='" . mysql_real_escape_string($text) . "'";
 	$res   = mysql_query($sqlab);
 	if(mysql_num_rows($res) > 0) {
 		echo "Reload Sperre<br><br>\n";
@@ -328,7 +329,7 @@ if($action == "write_mail")
 
 	if(!$err)
 	{
-		$sqlab = "select * from users where name='" . $empfaenger . "'";
+		$sqlab = "select * from users where name='" . mysql_real_escape_string($empfaenger) . "'";
 		$res    = mysql_query($sqlab);
 		if(mysql_num_rows($res)<= 0) {
 			echo "User existiert nicht<br><br>\n";
@@ -338,14 +339,14 @@ if($action == "write_mail")
 
 	if(!$err)
 	{
-		$sql = ("INSERT INTO mail (absender, empfaenger, datum, status, owner, titel, text) VALUES ('$whoami','$empfaenger','$datum','neu','ausgang','$betref','$text')");
+		$sql = ("INSERT INTO mail (absender, empfaenger, datum, status, owner, titel, text) VALUES ('".mysql_real_escape_string($whoami)."','".mysql_real_escape_string($empfaenger)."','$datum','neu','ausgang','".mysql_real_escape_string($betref)."','".mysql_real_escape_string($text)."')");
 		mysql_query($sql) or die(mysql_error());
 		echo "Email gesendet\n";
 	}
 }
 				?>
 				<br><br>
-				<img src=../daten/bilder/server.png width=100 height=100>
+<!-- 				<img src=../daten/bilder/server.png width=100 height=100> -->
 			</div>
 
 			<br>
