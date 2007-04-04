@@ -1,4 +1,0 @@
-+ Neue Funktionalität hinzugefügt
-- Funktionalität entfernt
-! Bugfix
-* Sonstige Änderung
