@@ -79,4 +79,7 @@ define("SYSTEM_ADMIN_editor",  "admin/seditor/editor.php"); #Seiten Editor
 define("SYSTEM_ADMIN_minst",   "daten/install_packages/"); #Pfad wo die Installdaten von Modulen liegt
 define("SYSTEM_ADMIN_infosm",  "2"); #Modus wohin die Daten gepsicehrt werden sollen von INstalierten Modulen
 define("SYSTEM_ADMIN_infosp",  "daten/installd_moduls/"); #Pfad wo daten gepsichert werden bei mod=2
+
+#Game Ordner
+define("SYSTEM_GAME_path",     "daten/game/") #Pfad wo alle Spiele Unterordner drinnen sind
 ?>

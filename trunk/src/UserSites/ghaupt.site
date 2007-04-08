@@ -1,0 +1,76 @@
+<h3>Übersicht</h3>
+
+<?php if($_SESSION["acces"]==1) { ?>
+	<?php 
+		if(isset($_POST["ls"])) {
+			$class = $_POST["beruf"];
+			$db = new db();
+			
+			$usera = explode("#|#",$_SESSION["login"]);
+			$db->query("UPDATE " . SYSTEM_dbpref . "users SET class='$class', acces='2' WHERE id='$usera[0]'");
+			
+			$_SESSION["acces"]="2";
+			
+			//Schiff aus der Schiffs index datei holen und in die DB eintragen
+			$fp = fopen(SYSTEM_GAME_path."ships/index.xml","r");
+			$con= "";
+			while($line=fgets($fp)) $con .= $line;
+			fclose($fp);
+			
+			$gblock = get_mark($con,"<ships>*</ships>");
+			for($i=0;$i<count($gblock);$i++) {
+				$sblock = get_mark($gblock[$i],"<ship>*</ship>");
+				for($i2=0;$i2<count($sblock);$i2++) {
+					$newa = get_mark($sblock[$i2],"<new>*</new>");
+					if($newa[0]=="TRUE") {
+						$typea = get_mark($sblock[$i2],"<type>*</type>");
+						if($typea[0]==$class) {
+							$filea = get_mark($sblock[$i2],"<file>*</file>");
+							$class = $filea[0];
+							break;
+						}
+					}
+				}
+			}
+			
+			$fp = fopen(SYSTEM_GAME_path."ships/".$class,"r");
+			$con= "";
+			while($line=fgets($fp)) $con .= $line;
+			fclose($fp);
+			
+			$shield=0;
+			$healt=0;
+			$sblock = get_mark($con,"<ship>*</ship>");
+			for($i=0;$i<count($sblock);$i++) {
+				$healta = get_mark($sblock[$i],"<healt>*</healt>");
+				$shielda= get_mark($sblock[$i],"<shield>*</shield>");
+				$shield=$shielda[0];
+				$healt =$healta[0];
+			}
+			
+			$db->query("INSERT INTO `s1_ships` (`id`, `userid`, `shipname`, `shipfilename`, `inhalt_db_id`, `waffen_db_id`, `healt`, `shield`) VALUES (NULL, '$usera[0]', 'My Ship', '$class', '', '', '$healt#$healt', '$shield#$shield')");
+	?>
+		<script language="JavaScript">
+		<!--
+			location.href='main.php?target=ghaupt';
+		//-->
+		</script>
+	<?php
+		} else { 
+	?>
+		<p>Sie scheinen sich das erste mal anzumelden. Daher müssen sie sich noch für eine Klasse entscheiden.
+		   Die klasse hat vorallem auswirkung auf die Quests die ihnen gestellt werden. Wählen sie einfach eine Klasse aus 
+		   und Klicken sie auf "Los Gehts!". Bitte beachten sie das sie auch wenn sie z.b. Pirat sind auch Handeln
+		   können. Es geht einzig und alleine um die Quests. Wählen sie nun zuerst ihre Klasse.</p>
+		<form action='main.php' method='post'>   
+			<p>Beruf: <select name='beruf' size='1'>
+						<option value='1'>Söldner</option>
+						<option value='2'>Händler</option>
+						<option value='3'>Polizei</option>
+						<option value='4'>Pirat</option>
+					  </select></p>
+			<p><input type='submit' value='Los Gehts!' name='ls'></p>
+		</form>
+	<?php } ?>
+<?php } if($_SESSION["acces"]!=1) { ?>
+<?php } ?>

@@ -32,9 +32,14 @@ if(isset($_GET["login"])||isset($_POST["login"])) {
 		}
 		else {
 			$dsatz = $db->get($res);
-			$_SESSION["login"]=$dsatz["id"]."#|#".$dsatz["uname"];
-			$_SESSION["acces"]=$dsatz["group"];
-			$mtpl->TextBlock("SUCCES",array("MSG"),array("Anmelden erfolgreich."));
+			if($dsatz["rkey"]!="") {
+				$mtpl->TextBlock("ERROR",array("MSG"),array("Sie müssen sich erst freischalten."));
+			}
+			else {
+				$_SESSION["login"]=$dsatz["id"]."#|#".$dsatz["uname"];
+				$_SESSION["acces"]=$dsatz["group"];
+				$mtpl->TextBlock("SUCCES",array("MSG"),array("Anmelden erfolgreich."));
+			}
 		}
 	}
 	

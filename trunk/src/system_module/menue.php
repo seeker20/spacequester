@@ -16,5 +16,10 @@ while($dsatz=$db->get($res)) {
 }
 $mtpl->clearList("list");
 
+if(isset($_GET["logout"])) {
+	$_SESSION["login"]="";
+	$_SESSION["acces"]="";
+}
+
 $mtpl->out();
 ?>

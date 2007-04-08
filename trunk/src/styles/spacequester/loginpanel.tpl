@@ -9,6 +9,11 @@
 	{SUCCES}
 		<p><font color='green'>{MSG}</font></p>
 		<p><a href='main.php?target=ghaupt'>Weiter zum Spiel</a></p>
+		<script language="JavaScript">
+		<!--
+			location.href='main.php?target=ghaupt';
+		//-->
+		</script>
 	{/SUCCES}
 	{ERROR}
 		<p><font color='red'>{MSG}</font></p>

@@ -19,7 +19,7 @@ a:hover {
 }
 
 .leftElement {
-	background-color:#0033FF;
+	background-color:#000066;
 	width:14%;
 	line-height:18px;
 	float:left;
@@ -31,7 +31,7 @@ a:hover {
 }
 
 .rightElemnt {
-	background-color:#0033FF;
+	background-color:#000066;
 	float:left;
 	width:82.5%;
 	margin-left:3%;
@@ -43,7 +43,7 @@ a:hover {
 }
 
 .middelElemnt {
-	background-color:#0033FF;
+	background-color:#000066;
 	margin-bottom:15px;
 	border:1px solid #aaaaaa;
 	left:200px;top:50px;
@@ -170,7 +170,7 @@ a:hover {
 	display: block;
 	padding: 3px;
 	width: 80%;
-	background-color: #0033FF;
+	background-color: #000066;
 	text-decoration: none;
 }
 #navcontainer a:link, .navlist a:visited
