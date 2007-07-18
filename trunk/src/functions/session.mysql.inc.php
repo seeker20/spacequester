@@ -1,8 +1,6 @@
 <?php
 #PHP-Myslq-Session manager
-
-#Muss noch überabrietne werden
-if(!(isset($CMS))) {
+if(!(defined("CMS"))) {
 	die("kein Zugriffs recht");
 }
 
@@ -33,7 +31,7 @@ function sstartSession() {
 	}
 	
 	#prüfen ob session noch aktuell ist
-	$db->query("SELECT * from " . SYSTEM_dbpref . "sessions where sessionid='" . $sid . "' LIMIT 1");
+	$db->query("SELECT * from " . SYSTEM_dbpref . "sessions where sessionid='" . AntiHacker($sid) . "' LIMIT 1");
 	if($db->count()<=0) {
 		$sid="";
 	}
@@ -76,8 +74,8 @@ function sstartSession() {
 	}
 	else {
 		#Session register füllen
-		$db->query("UPDATE " . SYSTEM_dbpref . "sessions set erstellt='" . $time . "' where sessionid='" . $sid . "'");
-		$db->query("SELECT * from " . SYSTEM_dbpref . "sessions where sessionid='" . $sid . "' LIMIT 1");
+		$db->query("UPDATE " . SYSTEM_dbpref . "sessions set erstellt='" . $time . "' where sessionid='" . AntiHacker($sid) . "'");
+		$db->query("SELECT * from " . SYSTEM_dbpref . "sessions where sessionid='" . AntiHacker($sid) . "' LIMIT 1");
 		
 		$dsatz  = $db->get();
 		$namea  = explode("|#|",$dsatz["namea"]);
@@ -88,7 +86,7 @@ function sstartSession() {
 		}
 		else {
 			for($i=0;$i<count($namea);$i++) {
-				$_SESSION[$namea[$i]]=$valuea[$i];
+				$_SESSION[ReAntiHacker($namea[$i])]=ReAntiHacker($valuea[$i]);
 			}
 		}
 	}
@@ -103,8 +101,10 @@ function sstopSession() {
 	$valuea;
 	
 	foreach ($_SESSION as $key => $value) {
-		$namea[count($namea)]=$key;
-		$valuea[count($valuea)]=$value;
+		if(trim($value)!="") {
+			$namea[count($namea)]=AntiHacker($key);
+			$valuea[count($valuea)]=AntiHacker($value);
+		}
 	}
 	
 	if(count($namea)!=count($valuea)) {
@@ -114,7 +114,7 @@ function sstopSession() {
 	$nameat  = implode("|#|",$namea);
 	$valueat = implode("|#|",$valuea);
 	
-	$db->query("UPDATE " . SYSTEM_dbpref . "sessions set namea='" . $nameat . "', valuea='" . $valueat . "' where sessionid='" . SID . "'");
+	$db->query("UPDATE " . SYSTEM_dbpref . "sessions set namea='" . $nameat . "', valuea='" . $valueat . "' where sessionid='" . AntiHacker(SID) . "'");
 }
 
 ?>

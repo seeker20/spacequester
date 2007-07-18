@@ -1,4 +1,6 @@
 <?php
+include "configs/impressum.inc.php";
+
 $db = new db();
 
 $mtpl = new tpl(SYSTEM_STYLE_PATH . $_SESSION["style"] . "/impressum.tpl");

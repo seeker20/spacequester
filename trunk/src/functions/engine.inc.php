@@ -1,6 +1,6 @@
 <?php
 #PHP-Template-Parser
-if(!(isset($CMS))) {
+if(!(defined("CMS"))) {
 	die("kein Zugriffs recht");
 }
 
@@ -39,7 +39,7 @@ class tpl {
 		}
 	}
 	
-	function CopyInTpl($tag,$path) {
+	function CopyInTpl($tag,$path,$params="") {
 		$fp = @fopen($path,"r");
 		if(!$fp) {
 			die("Konnte TemplateFile \"$path\" nicht öffnen");
@@ -51,13 +51,18 @@ class tpl {
 		fclose($fp);
 		
 		$search = $this->delimiterStart.$tag.$this->delimiterEnd;
-		$replace = $in;
+		if($params!="") {
+			$replace="<?php $params ?>".$in;
+		}
+		else {
+			$replace = $in;
+		}
 		$this->template_file = str_replace($search,$replace,$this->template_file);
 		
 		return $this->template_file;
 	}
 	
-	function CopyInTplRepeater($tag,$path) {
+	function CopyInTplRepeater($tag,$path,$params="") {
 		$fp = @fopen($path,"r");
 		if(!$fp) {
 			die("Konnte TemplateFile \"$path\" nicht öffnen");
@@ -69,7 +74,12 @@ class tpl {
 		fclose($fp);
 		
 		$search = $this->delimiterStart.$tag.$this->delimiterEnd;
-		$replace = $in.$this->delimiterStart.$tag.$this->delimiterEnd;
+		if($params!="") {
+			$replace = "<?php $params ?>".$in.$this->delimiterStart.$tag.$this->delimiterEnd;
+		}
+		else {
+			$replace = $in.$this->delimiterStart.$tag.$this->delimiterEnd;
+		}
 		$this->template_file = str_replace($search,$replace,$this->template_file);
 		
 		return $this->template_file;
@@ -177,6 +187,52 @@ class tpl {
 		$this->assign("ELSE","<?php } else { ?>");
 	}
 	
+	function sessionLinkReplace($urlstring,$content) {
+		if(substr_count($urlstring,"SID")==0) {
+			if(substr_count($urlstring,"?")==0) {
+				$nurlstring = $urlstring."?SID=".SID;
+			}
+			else {
+				$nurlstring = $urlstring."&SID=".SID;
+			}
+			
+			$content = str_replace($urlstring,$nurlstring,$content);
+		}
+		
+		return $content;
+	}
+	
+	function sessionLinkSystem($content) {
+		if(defined("SESSON_LINK_SYSTEM")) {
+			$contenta1 = get_mark($content,"<a href=\"main.php*\"");
+			$contenta2 = get_mark($content,"<a href='main.php*'");
+			for($i=0;$i<count($contenta1);$i++) {
+				$content = $this->sessionLinkReplace($contenta1[$i],$content);
+			}
+			for($i=0;$i<count($contenta2);$i++) {
+				$content = $this->sessionLinkReplace($contenta2[$i],$content);
+			}
+			
+			$contenta3 = get_mark($content,"<form*</form>");
+			for($i=0;$i<count($contenta3);$i++) {
+				if(substr_count($contenta3[$i],"<input type='hidden' name='SID' value='".SID."' />\n")==0) {
+					$content = str_replace($contenta3[$i],$contenta3[$i]."<input type='hidden' name='SID' value='".SID."' />\n",$content);
+				}
+			}
+			
+			$contenta4 = get_mark($content,"location.href='*';");
+			$contenta5 = get_mark($content,"location.href=\"*\";");
+			for($i=0;$i<count($contenta4);$i++) {
+				$content = $this->sessionLinkReplace($contenta4[$i],$content);
+			}
+			for($i=0;$i<count($contenta5);$i++) {
+				$content = $this->sessionLinkReplace($contenta5[$i],$content);
+			}
+		}
+		
+		return $content;
+	}
+	
 	function phpWrapper($content) {
 		ob_start();
 		$content = str_replace('<'.'?php','<'.'?',$content);
@@ -208,7 +264,7 @@ class tpl {
 			fputs($fp,$this->template_file);
 			fclose($fp);
 		}
-		return $this->phpWrapper($this->template_file);
+		return $this->sessionLinkSystem($this->phpWrapper($this->template_file));
 	}
 
 	function out() {

@@ -1,9 +1,6 @@
 <?php
 #PHP-Text-Session manager
-
-#Muss noch überabrietne werden hat noch grobe fehler
-
-if(!(isset($CMS))) {
+if(!(defined("CMS"))) {
 	die("kein Zugriffs recht");
 }
 

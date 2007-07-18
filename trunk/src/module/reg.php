@@ -22,13 +22,13 @@ if(isset($_GET["reg"])||isset($_POST["reg"])) {
 		$agb   = $_POST["agb"];
 	}
 	
-	$uname = mysql_real_escape_string(trim($uname));
-	$pass1 = trim($pass1);
-	$pass2 = trim($pass2);
-	$email = mysql_real_escape_string(trim($email));
-	$rname = mysql_real_escape_string(trim($rname));
-	$gyear = mysql_real_escape_string(trim($gyear));
-	$agb   = trim($agb);
+	$uname = AntiHacker(trim($uname));
+	$pass1 = AntiHacker($pass1);
+	$pass2 = AntiHacker($pass2);
+	$email = AntiHacker(trim($email));
+	$rname = AntiHacker(trim($rname));
+	$gyear = AntiHacker(trim($gyear));
+	$agb   = AntiHacker($agb);
 	
 	if($uname=="") {
 		//Usernamen angeben
@@ -68,22 +68,22 @@ if(isset($_GET["reg"])||isset($_POST["reg"])) {
 				$res = $db->query("SELECT * FROM " . SYSTEM_dbpref . "users WHERE rkey='$regkey'");
 				if($db->count($res1)<=0) $isnkey=true;
 			}
-			$db->query("INSERT INTO `s1_users` (`id`, `uname`, `pass`, `email`, `rname`, `gyear`, `rkey`, `class`, `group`) VALUES (NULL, '$uname', '$pass', '$email', '$rname', '$gyear', '$regkey', '', '1')");
-			$mtpl->TextBlock("SUCCES",array("MSG"),array("Eintrag erfolgreich erstellt. Ihnen wird eine email an \"$email\" gesendet mit einem bestätigungs link. Danach können sie sofort loslegen und in die Tiefen des Universums vordringen."));
+			$db->query("INSERT INTO `" . SYSTEM_dbpref . "users` (`id`, `uname`, `pass`, `email`, `rname`, `gyear`, `rkey`, `group`) VALUES (NULL, '$uname', '$pass', '$email', '$rname', '$gyear', '$regkey', '1')");
+			$mtpl->TextBlock("SUCCES",array("MSG"),array("Eintrag erfolgreich erstellt. Ihnen wird eine email an \"$email\" gesendet mit einem bestätigungs link. Danach können sie sofort lossurfen."));
 			
-			$absender = "noreplay@fkrauthan.de";
-			$betreff  = "Regiestreirung bei SpaceQuester";
-			$text     = "Wilkommen bei SpaceQuester $uname,\n\n";
-			$text    .= "Du scheinst dich für das Browsergame SpaceQuester zu interesieren. Nadann mal los du bruachst nur noch\n";
+			$absender = "noreplay@".str_replace("www","",$_SERVER["SERVER_NAME"]);
+			$betreff  = "Regiestreirung auf ".$_SERVER["SERVER_NAME"];
+			$text     = "Wilkommen bei ".str_replace("www","",$_SERVER["SERVER_NAME"])." $uname,\n\n";
+			$text    .= "Ich freue mich das sie sich für meine webseite interesieren. Nadann mal los du brauchst nur noch\n";
 			$text    .= "einen link anklicken und dann kannst du loslegen. EInfach folgenden Link anklicken oder im\n";
-			$text	 .= "Browser aufrufen. http://".$_SERVER["SERVER_NAME"].str_replace("main.php","", $_SERVER["PHP_SELF"])."regconf.php?id=$regkey \n";
-			$text	 .= "Danach können sie sich einloggen eine Klasse auswählen und sofort loslegen. \n\n";
+			$text	 .= "Browser aufrufen. http://".$_SERVER["SERVER_NAME"].str_replace("main.php","", $_SERVER["PHP_SELF"])."services/regconf.php?id=$regkey \n";
+			$text	 .= "Danach einfach einloggen und lossurfen. \n\n";
 			$text 	 .= "Viel Spaß wünscht ihnen ihr,\n";
-			$text	 .= "SpaceQuester Team.";
+			$text	 .= str_replace("www","",$_SERVER["SERVER_NAME"])." Team.";
 			
-			echo $text;
+			echo "<hr>".str_replace("\n","<br>",$text)."<hr>";
 			if(!mail($email,$betreff,$text,"From: $absender")) {
-				$mtpl->TextBlock("ERROR",array("MSG"),array("Konnte Email nicht verschicken bitte Kontaktirern sie den Administrator unter webmaster@fkrauthan.de."));
+				$mtpl->TextBlock("ERROR",array("MSG"),array("Konnte Email nicht verschicken bitte Kontaktirern sie den Administrator unter ".SYSTEM_ADMIN_mail));
 			}
 		}
 	}

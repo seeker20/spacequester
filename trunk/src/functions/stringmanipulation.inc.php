@@ -1,6 +1,6 @@
 <?php
 #String Manipulatiosn Funktionen
-if(!(isset($CMS))) {
+if(!(defined("CMS"))) {
 	die("kein Zugriffs recht");
 }
 
@@ -37,6 +37,29 @@ function Sonderzeichen($string) {
 	#Ä ä
 	$string = str_replace("ä","&auml;",$string);
 	$string = str_replace("Ä","&Auml;",$string);
+	
+	#ß
+	$string = str_replace("ß","&szlig;",$string);
+	
+	return $string;
+}
+
+#Die Restlichen Sonderzeichen
+function Sonderzeichen2($string) {
+	#&
+	$string = str_replace("&","&amp;",$string);
+	
+	#"
+	$string = str_replace("\"","&quot;",$string);
+	
+	#<
+	$string = str_replace("<","&lt;",$string);
+	
+	#>
+	$string = str_replace(">","&gt;",$string);
+	
+	#\
+	$string = str_replace("\\","&quot;",$string);
 	
 	return $string;
 }

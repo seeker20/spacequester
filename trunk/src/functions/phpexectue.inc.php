@@ -1,6 +1,6 @@
 <?php
 #PHP-Code asuführen zur laufzeit
-if(!(isset($CMS))) {
+if(!(defined("CMS"))) {
 	die("kein Zugriffs recht");
 }
 

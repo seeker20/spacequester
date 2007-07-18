@@ -1,4 +1,6 @@
 <?php
+include "configs/frame.inc.php";
+
 if(isset($_GET["target"])) {
 	$target=$_GET["target"];
 	$_SESSION["lastaction"]=1;
@@ -52,13 +54,13 @@ if(isset($_GET["starget"])||isset($_POST["starget"])||$_SESSION["lastaction"]==2
 			if($dsatz["acces_groups"]=="") {
 				$is = true;
 			}
-			else if($_SESSION["acces"]=="") {
-				printError("Sie besitzen nicht das Zugansrecht um die seite \"" . $starget . "\" aufzurufen.");
-			}
 			else {
+				if($_SESSION["acces"]=="") $acces=0;
+				else $acces = $_SESSION["acces"];
+				
 				$split = explode("#",$dsatz["acces_groups"]);
 				for($i=0;$i<count($split);$i++) {
-					if($_SESSION["acces"]==$split[$i]) {
+					if($acces==$split[$i]) {
 						$is=true;
 						break;
 					}

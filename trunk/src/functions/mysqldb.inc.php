@@ -1,6 +1,6 @@
 <?php
-#PHP-Template-Parser
-if(!(isset($CMS))) {
+#MYSQL Engine
+if(!(defined("CMS"))) {
 	die("kein Zugriffs recht");
 }
 

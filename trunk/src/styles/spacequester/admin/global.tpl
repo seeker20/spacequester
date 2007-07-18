@@ -1,4 +1,4 @@
-<b>Informationen</b><br><br>
+<b>Informationen</b><br /><br />
 {INFO}
 <p><font color='red'><b>{TEXT}</b></font></p>
 {/INFO}

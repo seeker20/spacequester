@@ -6,7 +6,7 @@ if(isset($_POST["gbuch"])) {
 	#hier die daten asuwerten
 	$err = false;
 	if(isset($_POST["gfname"])) {
-		$gfname = mysql_real_escape_string(trim($_POST["gfname"]));
+		$gfname = AntiHacker($_POST["gfname"]);
 		if($gfname=='') {
 			$gbout.="Kein Name eingegben.<br>\n";
 			$err=true;
@@ -14,7 +14,7 @@ if(isset($_POST["gbuch"])) {
 	}
 	else $gfname="";
 	if(isset($_POST["gfemail"])) {
-		$gfemail = mysql_real_escape_string(trim($_POST["gfemail"]));
+		$gfemail = AntiHacker($_POST["gfemail"]);
 		if($gfemail=='') {
 			$gbout.="Keine email eingegben.<br>\n";
 			$err=true;
@@ -22,11 +22,11 @@ if(isset($_POST["gbuch"])) {
 	}
 	else $gfemail="";
 	if(isset($_POST["gfhp"])) {
-		$gfhp = mysql_real_escape_string(trim($_POST["gfhp"]));
+		$gfhp = AntiHacker($_POST["gfhp"]);
 	}
 	else $gfhp="";
 	if(isset($_POST["gftext"])) {
-		$gftext = mysql_real_escape_string(trim($_POST["gftext"]));
+		$gftext = AntiHacker($_POST["gftext"]);
 		if($gftext=='') {
 			$gbout.="Kein Text eingegben.<br>\n";
 			$err=true;
@@ -55,7 +55,7 @@ $mtpl->assign('method','post');
 $res = $db->query("select * from " . SYSTEM_dbpref . "gbuch order by id desc");
 while($dsatz=$db->get($res)) {
 	$mtpl->TextRepeater("list",array("gbuchname","gbuchemail","gbuchhp","gbuchdate","gbuchtext"),
-						array($dsatz["name"],$dsatz["email"],$dsatz["hp"], $dsatz["date"], str_replace('\n',"<br>", $dsatz["text"])));
+						array(ReAntiHacker($dsatz["name"]),ReAntiHacker($dsatz["email"]),ReAntiHacker($dsatz["hp"]), ReAntiHacker($dsatz["date"]), str_replace('\n',"<br>", ReAntiHacker($dsatz["text"]))));
 }
 $mtpl->clearList("list");
 

@@ -9,8 +9,6 @@
 			$usera = explode("#|#",$_SESSION["login"]);
 			$db->query("UPDATE " . SYSTEM_dbpref . "users SET class='$class', acces='2' WHERE id='$usera[0]'");
 			
-			$_SESSION["acces"]="2";
-			
 			//Schiff aus der Schiffs index datei holen und in die DB eintragen
 			$fp = fopen(SYSTEM_GAME_path."ships/index.xml","r");
 			$con= "";
@@ -48,7 +46,11 @@
 				$healt =$healta[0];
 			}
 			
-			$db->query("INSERT INTO `s1_ships` (`id`, `userid`, `shipname`, `shipfilename`, `inhalt_db_id`, `waffen_db_id`, `healt`, `shield`) VALUES (NULL, '$usera[0]', 'My Ship', '$class', '', '', '$healt#$healt', '$shield#$shield')");
+			$db->query("INSERT INTO `" . SYSTEM_dbpref . "ships` (`id`, `userid`, `shipname`, `shipfilename`, `inhalt_db_id`, `waffen_db_id`, `healt`, `shield`) VALUES (NULL, '$usera[0]', 'My Ship', '$class', '', '', '$healt#$healt', '$shield#$shield')");
+			
+			$dsatz = $db->Get($db->query("SELECT * FROM " . SYSTEM_dbpref . "ships WHERE userid='$usera[0]'"));
+			//$_SESSION["ship"]=$dsatz["id"]."|#|".$dsatz["shipname"];
+			//$_SESSION["ship"] = $dsatz["id"]."|#|".$dsatz["shipname"];
 	?>
 		<script language="JavaScript">
 		<!--
@@ -56,7 +58,7 @@
 		//-->
 		</script>
 	<?php
-		} else { 
+		} else if(!isset($_SESSION["ship"])||$_SESSION["ship"]==""){ 
 	?>
 		<p>Sie scheinen sich das erste mal anzumelden. Daher müssen sie sich noch für eine Klasse entscheiden.
 		   Die klasse hat vorallem auswirkung auf die Quests die ihnen gestellt werden. Wählen sie einfach eine Klasse aus 
@@ -72,5 +74,6 @@
 			<p><input type='submit' value='Los Gehts!' name='ls'></p>
 		</form>
 	<?php } ?>
-<?php } if($_SESSION["acces"]!=1) { ?>
+<?php } if(isset($_SESSION["ship"])&&$_SESSION["ship"]!="") { ?>
+Schiffs liste
 <?php } ?>

@@ -15,15 +15,15 @@ if(isset($_GET["delsite"])||isset($_POST["delsite"])) {
 			#mysqlmod
 		}
 		else {
-			if(!file_exists(SYSTEM_USERSITESF . $delid)) {
-				$mtpl->TextBlock("ERROR",array("ERRMSG"),array("Konnte die Seite \"$delid\" nicht finden."));
+			if(!file_exists(SYSTEM_USERSITESF . $delid . ".site")) {
+				$mtpl->TextBlock("ERROR",array("ERRMSG"),array("Konnte die Seite \"$delid.site\" nicht finden."));
 			}
 			else {
-				if(!unlink(SYSTEM_USERSITESF . $delid)) {
-					$mtpl->TextBlock("ERROR",array("ERRMSG"),array("Konnte die Seite \"$delid\" nicht löschen."));
+				if(!unlink(SYSTEM_USERSITESF . $delid. ".site")) {
+					$mtpl->TextBlock("ERROR",array("ERRMSG"),array("Konnte die Seite \"$delid.site\" nicht löschen."));
 				}
 				else {
-					$mtpl->TextBlock("SUCCES",array("SUCCESMSG"),array("Die Seite \"$delid\" wurde erfolgreich gelöscht."));
+					$mtpl->TextBlock("SUCCES",array("SUCCESMSG"),array("Die Seite \"$delid.site\" wurde erfolgreich gelöscht."));
 				}
 			}
 		}
@@ -34,7 +34,7 @@ else if(isset($_GET["newsite"])||isset($_POST["newsite"])) {
 		$editor = "";
 		$fp = fopen(SYSTEM_ADMIN_editor,"r");
 		while($line = fgets($fp)) {
-			str_replace("{CONTENT}","",trim($line)) . "\n";
+			$editor .= str_replace("{CONTENT}","",trim($line));
 		}
 		fclose($fp);
 		
@@ -59,7 +59,7 @@ else if(isset($_GET["newsite"])||isset($_POST["newsite"])) {
 			$editor = "";
 			$fp = fopen(SYSTEM_ADMIN_editor,"r");
 			while($line = fgets($fp)) {
-				$editor .= str_replace("{CONTENT}",bbcoderet($content),trim($line)) . "\n";
+				$editor .= str_replace("{CONTENT}",$content,trim($line));
 			}
 			fclose($fp);
 				
@@ -102,15 +102,15 @@ else if(isset($_GET["editsite"])||isset($_POST["editsite"])) {
 			#mysqlmod
 		}
 		else {
-			if(!file_exists(SYSTEM_USERSITESF . $editid)) {
+			if(!file_exists(SYSTEM_USERSITESF . $editid . ".site")) {
 				$mtpl->TextBlock("ERROR",array("ERRMSG"),array("Die Seite \"$editid\" existiert nicht."));
 			}
 			else {
-				$mtpl->assign('SITENAME',$editid);
-				$mtpl->assign('SNAME',str_replace('.site','',$editid));
+				$mtpl->assign('SITENAME',$editid.".site");
+				$mtpl->assign('SNAME',$editid);
 				
 				$content = "";
-				$fp = fopen(SYSTEM_USERSITESF . $editid,"r");
+				$fp = fopen(SYSTEM_USERSITESF . $editid . ".site","r");
 				while($line = fgets($fp)) {
 					$content .= trim($line) . "\n";
 				}
@@ -119,7 +119,7 @@ else if(isset($_GET["editsite"])||isset($_POST["editsite"])) {
 				$editor = "";
 				$fp = fopen(SYSTEM_ADMIN_editor,"r");
 				while($line = fgets($fp)) {
-					$editor .= str_replace("{CONTENT}",bbcoderet($content),trim($line)) . "\n";
+					$editor .= str_replace("{CONTENT}",$content,trim($line));
 				}
 				fclose($fp);
 				
@@ -139,13 +139,13 @@ else if(isset($_GET["editsite"])||isset($_POST["editsite"])) {
 				$mtpl->TextBlock("ERROR",array("ERRMSG"),array("Die Seite \"$editid\" existiert nicht."));
 			}
 			else {
-				$mtpl->assign('SITENAME',$editid);
-				$mtpl->assign('SNAME',str_replace('.site','',$editid));
+				$mtpl->assign('SITENAME',$editid.".site");
+				$mtpl->assign('SNAME',$editid);
 				
 				$editor = "";
 				$fp = fopen(SYSTEM_ADMIN_editor,"r");
 				while($line = fgets($fp)) {
-					$editor .= str_replace("{CONTENT}",bbcoderet($content),trim($line)) . "\n";
+					$editor .= str_replace("{CONTENT}",$content,trim($line));
 				}
 				fclose($fp);
 				
@@ -161,11 +161,11 @@ else if(isset($_GET["editsite"])||isset($_POST["editsite"])) {
 			#mysqlmod
 		}
 		else {
-			if(!file_exists(SYSTEM_USERSITESF . $editid)) {
+			if(!file_exists(SYSTEM_USERSITESF . $editid . ".site")) {
 				$mtpl->TextBlock("ERROR",array("ERRMSG"),array("Die Seite \"$editid\" existiert nicht."));
 			}
 			else {
-				$fp = @fopen(SYSTEM_USERSITESF . $editid,"w");
+				$fp = @fopen(SYSTEM_USERSITESF . $editid . ".site","w");
 				if(!$fp) {
 					$mtpl->TextBlock("ERROR",array("ERRMSG"),array("Konnte Seite \"$editid\" nicht bearbeiten."));
 				}

@@ -18,12 +18,16 @@ if(isset($_GET["init"])) {
 	}
 }
 
+if(isset($_COOKIE["c-test"])) {
+	$_SESSION["Cookies"]=true;
+}
+
 if(empty($_SESSION["style"])) {
 	if(!$tmp=setcookie("c-test","1",time()+120)) {
 		$_SESSION["Cookies"]=false;
 	}
 		
-	echo "<!doctype html public \"-//W3C//DTD HTML 4.0 //EN\">";
+	echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">";
 	echo "<html>\n";
 	echo "<head>\n";
 	echo "<title>Init Site...</title>\n";
@@ -34,7 +38,7 @@ if(empty($_SESSION["style"])) {
 	else if(isset($_GET["starget"])) {
 		echo "&starget=" . $_GET["starget"];
 	}
-	echo "'>\n";
+	echo "' />\n";
 	echo '<script language="JavaScript" type="text/javascript">'."\n";
 	echo '<!--'."\n";
 	echo "location.href='main.php?j=1&init=1";
@@ -63,21 +67,7 @@ if(empty($_SESSION["style"])) {
 }
 
 if($_SESSION["Cookies"]==false) {
-	echo "<!doctype html public \"-//W3C//DTD HTML 4.0 //EN\">";
-	echo "<html>\n";
-	echo "<head>\n";
-	echo "<title>CMS Error</title>\n";
-	echo "</head>\n";
-	echo "<body>\n";
-	echo "<h1>Fehler: Sie benötigen Cookies</h1>\n";
-	echo "<p>Um diese Seite anzeigen zu können benötigen sie Cookies sie scheinen bei ";
-	echo "Ihnen Deaktiviert zu sein. Vergewissern sie sich das sie eingeschalten sind ";
-	echo "und klicken sie <a href='main.php'>hier.</a></p>\n";
-	echo "<br>\n";
-	echo "<p>Ich entschuldige mich für diese Unannemlichkeiten und werde das bald behebn.</p>\n";
-	echo "</body>\n";
-	echo "</html>";
-	exit(-1);
+	//define("SESSON_LINK_SYSTEM",true);
 }
 ?>
 
@@ -123,11 +113,31 @@ while($dsatz=$db->get()) {
 			$is=true;
 		}
 	}
+	
 	if(!$is) {
 		$ids[count($ids)]=$dsatz["feld"];
 	}
 	
-	$tpl->CopyInTplRepeater("FELD_" . $dsatz["feld"],$path . "/" . $dsatz["adress"]);
+	$is = false;
+	if($dsatz["acces_groups"]=="") {
+		$is = true;
+	}
+	else {
+		if($_SESSION["acces"]=="") $acces=0;
+		else $acces = $_SESSION["acces"];
+		
+		$split = explode("#",$dsatz["acces_groups"]);
+		for($i=0;$i<count($split);$i++) {
+			if($acces==$split[$i]) {
+				$is=true;
+				break;
+			}
+		}
+	}
+	
+	if($is) {
+		$tpl->CopyInTplRepeater("FELD_" . $dsatz["feld"],$path . "/" . $dsatz["adress"],$dsatz["params"]);
+	}
 	
 }
 for($i=0;$i<count($ids);$i++) {
@@ -135,7 +145,7 @@ for($i=0;$i<count($ids);$i++) {
 }
 
 $tpl->assign('PRODUKTION',"fkr-soft");
-$tpl->assign('PRODUKTNAME',"SpaceQuester");
+$tpl->assign('PRODUKTNAME',"Phönix View CMS");
 $tpl->assign('AUTOR',"Florian Krauthan");
 $tpl->assign('VERSION',SYSTEM_VERSION);
 

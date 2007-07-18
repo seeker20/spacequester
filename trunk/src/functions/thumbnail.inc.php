@@ -1,6 +1,6 @@
 <?php
 #Thunbnail kalsse
-if(!(isset($CMS))) {
+if(!(defined("CMS"))) {
 	die("kein Zugriffs recht");
 }
 

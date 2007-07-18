@@ -1,6 +1,6 @@
 <?php
 #Hilfe Tools fürs CMS
-if(!(isset($CMS))) {
+if(!(defined("CMS"))) {
 	die("kein Zugriffs recht");
 }
 

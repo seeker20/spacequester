@@ -1,4 +1,7 @@
 <?php
+#
+#Muss komplet überarbeitet werden
+#
 function loadNewInstallData($path,$tpl,$isxml,$mod) {
 	if($isxml) {
 		//Laden der Infos aus der XML

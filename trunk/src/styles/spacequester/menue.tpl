@@ -5,12 +5,12 @@
 <li><a href='{linktarget}'>{linkname}</a></li>
 {/list}
 <?php if(isset($_SESSION["login"])&&$_SESSION["login"]!="") { ?>
-	<li><a href='main.php?logout=1'>Logout</a></li>
+	<li><a href='main.php?starget=logout'>Logout</a></li>
 <?php } ?>
 <?php if(isset($_GET["logout"])) { ?>
 	<script language="JavaScript">
 	<!--
-		location.href='main.php?target=loginpanel';
+		location.href='main.php?starget=loginpanel';
 	//-->
 	</script>
 <?php } ?>

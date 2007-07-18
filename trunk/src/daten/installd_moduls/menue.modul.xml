@@ -24,7 +24,7 @@
 		<sql>
 			<name>menue</name>
 			<modus>CREATE</modus>
-			<query>`id` int(11) NOT NULL auto_increment, `name` varchar(255) NOT NULL, `target` varchar(255) NOT NULL, `log` int(1) NOT NULL, PRIMARY KEY  (`id`)</query>
+			<query>`id` int(11) NOT NULL auto_increment, `name` varchar(255) NOT NULL, `target` varchar(255) NOT NULL, PRIMARY KEY  (`id`)</query>
 		</sql>
 	</data>
 	

@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<title>Regiestrierung best&auml;tigen</title>
-		<META http-equiv='refresh' content='10;URL=main.php'>
+		<META http-equiv='refresh' content='5;URL=../main.php'>
 	</head>
 	<body>
 		<h1>Regiestirerung Best&auml;tigen</h1>
@@ -22,6 +22,6 @@
 			die ("<p>Sie wurden erfolgreich freigeschalten.</p>");
 		?>
 		
-		<p>Sie werden automaitsch in 10 Sekunden auf die Home seite umgeleitet. <a href='main.php'>Zur&uuml;ck zur Homepage</a></p>
+		<p>Sie werden automaitsch in 5 Sekunden auf die Home seite umgeleitet. <a href='../main.php'>Zur&uuml;ck zur Homepage</a></p>
 	</body>
 </html>

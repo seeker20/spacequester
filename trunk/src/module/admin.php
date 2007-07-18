@@ -60,8 +60,8 @@ if(!$admin) {
 			$mtpl->TextBlock("loginerror",array("errormessage"),array("Kein Passwort eingegeben."));
 		}
 		else {
-			$username = mysql_real_escape_string($_POST["username"]);
-			$userpass = md5($_POST["userpass"]);
+			$username = AntiHacker($_POST["username"]);
+			$userpass = md5(AntiHacker($_POST["userpass"]));
 			$db->query("select * from " . SYSTEM_dbpref . "admin where name='$username' and password='$userpass'");
 			if($db->count()<=0) {
 				$mtpl->TextBlock("loginerror",array("errormessage"),array("Die Anmeldedaten Stimmen nicht."));
@@ -73,7 +73,7 @@ if(!$admin) {
 				}
 				else {
 					$_SESSION["adminskey"]	= SYSTEM_ADMIN_skey;
-					$_SESSION["adminid"]	= $dsatz["id"];
+					$_SESSION["adminid"]	= ReAntiHacker($dsatz["id"]);
 					
 					$db->query("UPDATE " . SYSTEM_dbpref . "admin Set ip = '".getenv("REMOTE_ADDR")."' WHERE id = '".$_SESSION["adminid"]."';");
 					

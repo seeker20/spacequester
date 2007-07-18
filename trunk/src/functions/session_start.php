@@ -1,17 +1,22 @@
 <?php
-$CMS = true;
-include "configs/config.inc.php";
-include SYSTEM_FUNCTIONS . "engine.inc.php";
-include SYSTEM_FUNCTIONS . "stringmanipulation.inc.php";
-include SYSTEM_FUNCTIONS . "phpexectue.inc.php";
-include SYSTEM_FUNCTIONS . "phpbb.inc.php";
-include SYSTEM_FUNCTIONS . "helptools.inc.php";
+define("CMS", true);
+
+if(!is_file("configs/config.inc.php")) $add="../";
+else $add="";
+
+include $add."configs/config.inc.php";
+include $add.SYSTEM_FUNCTIONS . "engine.inc.php";
+include $add.SYSTEM_FUNCTIONS . "stringmanipulation.inc.php";
+include $add.SYSTEM_FUNCTIONS . "phpexectue.inc.php";
+include $add.SYSTEM_FUNCTIONS . "phpbb.inc.php";
+include $add.SYSTEM_FUNCTIONS . "helptools.inc.php";
+include $add.SYSTEM_FUNCTIONS . "security.inc.php";
 
 if(SYSTEM_db_mod=="1") {
-	include SYSTEM_FUNCTIONS . "mysqldb.inc.php";
+	include $add.SYSTEM_FUNCTIONS . "mysqldb.inc.php";
 }
 else {
-	include SYSTEM_FUNCTIONS . "textdb.inc.php";
+	include $add.SYSTEM_FUNCTIONS . "textdb.inc.php";
 }
 
 $db = new db();
@@ -24,10 +29,10 @@ else {
 
 
 if(SYSTEM_SESSION_mod=="1") {
-	require_once SYSTEM_FUNCTIONS . "session.mysql.inc.php";
+	require_once $add.SYSTEM_FUNCTIONS . "session.mysql.inc.php";
 }
 else {
-	require_once SYSTEM_FUNCTIONS . "session.text.inc.php";
+	require_once $add.SYSTEM_FUNCTIONS . "session.text.inc.php";
 }
 ob_start();
 

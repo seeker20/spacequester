@@ -9,19 +9,18 @@ $mtpl->assign('sitetitle','Pictures');
 #list1 asufüllen
 if(isset($_GET["gpid"])) {
 	$katarry;
-	$db->query("select * from " . SYSTEM_dbpref . "pics where katid='" . mysql_escape_string($_GET["gpid"]) . "'");
+	$db->query("select * from " . SYSTEM_dbpref . "pics where katid='" . AntiHacker($_GET["gpid"]) . "'");
 	while($dsatz=$db->get()) {
 		$mtpl->TextRepeater("LIST1",array("PICSRC","KATNAME","PICNAME","GPID","PID"),
-						array($dsatz["target"],$dsatz["katname"],$dsatz["name"], $dsatz["katid"], $dsatz["id"]));	
+						array(ReAntiHacker($dsatz["target"]),ReAntiHacker($dsatz["katname"]),ReAntiHacker($dsatz["name"]), ReAntiHacker($dsatz["katid"]), ReAntiHacker($dsatz["id"])));	
 	}
-	$mtpl->clearList("LIST1");
 }
 
 #list2 asufüllen
 $db->query("select * from " . SYSTEM_dbpref . "pics");
 
 if($db->count()<=0) {
-	$string = "<p>Keine Bilder verfügar.</p>\n";
+	$mtpl->TextRepeater("NOPICTURES","","");
 }
 else {
 	$katarray;
@@ -29,14 +28,14 @@ else {
 	while($dsatz=$db->get()) {
 		$err=false;
 		for($i=0;$i<count($katarray);$i++) {
-			if($katarray[$i]==$dsatz["katid"]) {
+			if($katarray[$i]==ReAntiHacker($dsatz["katid"])) {
 				$err=true;
 				break;
 			}
 		}
 		if(!$err) {
-			$katarray[count($katarray)]=$dsatz["katid"];	
-			$res	 = $db->query("select * from " . SYSTEM_dbpref . "pics where katid='" . $dsatz["katid"] . "'",true);
+			$katarray[count($katarray)]=ReAntiHacker($dsatz["katid"]);	
+			$res	 = $db->query("select * from " . SYSTEM_dbpref . "pics where katid='" . ReAntiHacker($dsatz["katid"]) . "'",true);
 			$num	 = $db->count($res);
 			
 			srand(microtime()*1000000);
@@ -45,20 +44,19 @@ else {
 			for($i=0;$i<$num;$i++) $dsatz=$db->get($res);
 			
 			$mtpl->TextRepeater("LIST2",array("PICSRC","KATNAME","PICNAME","GPID","PID"),
-						array($dsatz["target"],$dsatz["katname"],$dsatz["name"], $dsatz["katid"], $dsatz["id"]));				
+						array(ReAntiHacker($dsatz["target"]),ReAntiHacker($dsatz["katname"]),ReAntiHacker($dsatz["name"]), ReAntiHacker($dsatz["katid"]), ReAntiHacker($dsatz["id"])));				
 		}
 	}
-	$mtpl->clearList("LIST2");
 }
 
 #GruppenID und Namen einsetzen
 if(isset($_GET["gpid"])) {
 	$gpid = $_GET["gpid"];
 	
-	$db->query("select * from " . SYSTEM_dbpref . "pics where katid='" . mysql_escape_string($gpid) . "'");
+	$db->query("select * from " . SYSTEM_dbpref . "pics where katid='" . AntiHacker($gpid) . "'");
 	$dsatz = $db->get();
 	
-	$gname = $dsatz["katname"];
+	$gname = ReAntiHacker($dsatz["katname"]);
 	
 	$mtpl->assign('GRUPPENID',$gpid);
 	$mtpl->assign('GRUPPENNAME',$gname);
@@ -66,11 +64,11 @@ if(isset($_GET["gpid"])) {
 else if(isset($_GET["pid"])) {
 	$pid = $_GET["pid"];
 	
-	$db->query("select * from " . SYSTEM_dbpref . "pics where id='" . mysql_escape_string($pid) . "'");
+	$db->query("select * from " . SYSTEM_dbpref . "pics where id='" . AntiHacker($pid) . "'");
 	$dsatz = $db->get();
 	
-	$gname = $dsatz["katname"];
-	$pid   = $dsatz["katid"];
+	$gname = ReAntiHacker($dsatz["katname"]);
+	$pid   = ReAntiHacker($dsatz["katid"]);
 	
 	$mtpl->assign('GRUPPENID',$pid);
 	$mtpl->assign('GRUPPENNAME',$gname);
@@ -81,25 +79,25 @@ else if(isset($_GET["pid"])) {
 if(isset($_GET["pid"])) {
 	$pid = $_GET["pid"];
 	
-	$db->query("select * from " . SYSTEM_dbpref . "pics where id='" . mysql_escape_string($pid) . "'");
+	$db->query("select * from " . SYSTEM_dbpref . "pics where id='" . AntiHacker($pid) . "'");
 	$dsatz = $db->get();
 	
-	$mtpl->assign('PICNAME',$dsatz["name"]);
-	$mtpl->assign('PICBESCHR',$dsatz["beschreibung"]);
-	$mtpl->assign('PICSRC',$dsatz["target"]);
+	$mtpl->assign('PICNAME',ReAntiHacker($dsatz["name"]));
+	$mtpl->assign('PICBESCHR',ReAntiHacker($dsatz["beschreibung"]));
+	$mtpl->assign('PICSRC',ReAntiHacker($dsatz["target"]));
 	
-	$db->query("select * from " . SYSTEM_dbpref . "pics where katid='" . $dsatz["katid"] . "'");
+	$db->query("select * from " . SYSTEM_dbpref . "pics where katid='" . AntiHacker($dsatz["katid"]) . "'");
 
 	$previd=0;
 	$nextid=0;
 	$next=false;
 	while($dsatz2=$db->get()) {
-		if($dsatz2["id"]==$dsatz["id"]) {
+		if(ReAntiHacker($dsatz2["id"])==ReAntiHacker($dsatz["id"])) {
 			$next=true;
 		}
 		else if($next) {
 			$next=false;
-			$nextid=$dsatz2["id"];
+			$nextid=ReAntiHacker($dsatz2["id"]);
 			break;
 		}
 		else {
@@ -108,13 +106,17 @@ if(isset($_GET["pid"])) {
 	}
 	
 	if($previd==0)
-		$previd=$dsatz["id"];
+		$previd=ReAntiHacker($dsatz["id"]);
 	if($nextid==0)
-		$nextid=$dsatz["id"];
+		$nextid=ReAntiHacker($dsatz["id"]);
 		
 	$mtpl->assign('BEVORPICID',$previd);
 	$mtpl->assign('NEXTPICID',$nextid);
 }
+
+$mtpl->clearList("LIST1");
+$mtpl->clearList("LIST2");
+$mtpl->clearList("NOPICTURES");
 
 $mtpl->out();
 ?>

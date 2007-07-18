@@ -1,50 +1,50 @@
-{INFO}<br>
-<b>Admins</b><br><br>
+{INFO}<br />
+<b>Admins</b><br /><br />
 {IF isset {GET=new}}
-<form action="main.php" method="POST">
-	<input type="hidden" name="action" value="save">
+<form action="main.php" method="post">
+	<input type="hidden" name="action" value="save" />
 	<table>
 		<tr>
 			<td><b>Neuer Admin</b></td>
 		</tr>
 		<tr>
 			<td>Benutzername:</td>
-			<td><input type="input" name="username" value=""><br></td>
+			<td><input type="input" name="username" value="" /><br /></td>
 		</tr>
 		<tr>
 			<td>Passwort:</td>
-			<td><input type="password" name="password" value=""><br></td>
+			<td><input type="password" name="password" value="" /><br /></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="Erstellen"></td>
+			<td><input type="submit" value="Erstellen" /></td>
 		</tr>
 	</table>
 </form>
 {ELSE IF isset {GET=edit}}
-<form action="main.php" method="POST">
-	<input type="hidden" name="action" value="saveedit">
-	<input type="hidden" name="id" value="{AID}">
+<form action="main.php" method="post">
+	<input type="hidden" name="action" value="saveedit" />
+	<input type="hidden" name="id" value="{AID}" />
 	<table>
 		<tr>
 			<td><b>Admin bearbeiten</b></td>
 		</tr>
 		<tr>
 			<td>Benutzername:</td>
-			<td><input type="input" name="username" value="{ADMINNAME}"><br></td>
+			<td><input type="input" name="username" value="{ADMINNAME}" /><br /></td>
 		</tr>
 		<tr>
 			<td>Passwort:</td>
-			<td><input type="password" name="password" value=""><br></td>
+			<td><input type="password" name="password" value="" /><br /></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="Ändern"></td>
+			<td><input type="submit" value="Ändern" /></td>
 		</tr>
 	</table>
 </form>
 {ELSE}
-<form action="main.php" method="GET">
-<input type="hidden" name="new" value="1">
-<input type="submit" value="Neuer Admin">
+<form action="main.php" method="get">
+<input type="hidden" name="new" value="1" />
+<input type="submit" value="Neuer Admin" />
 </form>
 <table border="1" width="98%">
 	<tr>
