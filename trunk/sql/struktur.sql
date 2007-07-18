@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Erstellungszeit: 04. April 2007 um 15:05
+-- Erstellungszeit: 18. Juli 2007 um 16:55
 -- Server Version: 5.0.27
 -- PHP-Version: 5.2.0
 -- 
@@ -15,6 +15,9 @@
 -- 
 -- Tabellenstruktur für Tabelle `s1_acces`
 -- 
+-- Erzeugt am: 04. April 2007 um 14:52
+-- Aktualisiert am: 18. Juli 2007 um 15:07
+-- 
 
 DROP TABLE IF EXISTS `s1_acces`;
 CREATE TABLE IF NOT EXISTS `s1_acces` (
@@ -22,12 +25,15 @@ CREATE TABLE IF NOT EXISTS `s1_acces` (
   `file` varchar(255) collate latin1_general_ci NOT NULL,
   `acces_groups` varchar(255) collate latin1_general_ci NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
 -- 
 -- Tabellenstruktur für Tabelle `s1_admin`
+-- 
+-- Erzeugt am: 18. März 2007 um 16:12
+-- Aktualisiert am: 18. März 2007 um 17:24
 -- 
 
 DROP TABLE IF EXISTS `s1_admin`;
@@ -45,6 +51,9 @@ CREATE TABLE IF NOT EXISTS `s1_admin` (
 -- 
 -- Tabellenstruktur für Tabelle `s1_admin_menue`
 -- 
+-- Erzeugt am: 18. März 2007 um 16:12
+-- Aktualisiert am: 18. März 2007 um 17:25
+-- 
 
 DROP TABLE IF EXISTS `s1_admin_menue`;
 CREATE TABLE IF NOT EXISTS `s1_admin_menue` (
@@ -58,6 +67,9 @@ CREATE TABLE IF NOT EXISTS `s1_admin_menue` (
 
 -- 
 -- Tabellenstruktur für Tabelle `s1_gbuch`
+-- 
+-- Erzeugt am: 18. März 2007 um 16:12
+-- Aktualisiert am: 18. März 2007 um 17:12
 -- 
 
 DROP TABLE IF EXISTS `s1_gbuch`;
@@ -76,6 +88,9 @@ CREATE TABLE IF NOT EXISTS `s1_gbuch` (
 -- 
 -- Tabellenstruktur für Tabelle `s1_links`
 -- 
+-- Erzeugt am: 18. März 2007 um 16:12
+-- Aktualisiert am: 18. März 2007 um 17:12
+-- 
 
 DROP TABLE IF EXISTS `s1_links`;
 CREATE TABLE IF NOT EXISTS `s1_links` (
@@ -90,20 +105,29 @@ CREATE TABLE IF NOT EXISTS `s1_links` (
 -- 
 -- Tabellenstruktur für Tabelle `s1_menue`
 -- 
+-- Erzeugt am: 18. Juli 2007 um 14:30
+-- Aktualisiert am: 18. Juli 2007 um 16:49
+-- 
 
 DROP TABLE IF EXISTS `s1_menue`;
 CREATE TABLE IF NOT EXISTS `s1_menue` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(255) NOT NULL,
   `target` varchar(255) NOT NULL,
-  `log` int(1) NOT NULL,
+  `acces_groups` varchar(255) NOT NULL,
+  `menue_id` int(11) NOT NULL,
+  `top_entry` int(11) NOT NULL,
+  `pos` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 -- --------------------------------------------------------
 
 -- 
 -- Tabellenstruktur für Tabelle `s1_news`
+-- 
+-- Erzeugt am: 18. März 2007 um 16:36
+-- Aktualisiert am: 18. März 2007 um 17:38
 -- 
 
 DROP TABLE IF EXISTS `s1_news`;
@@ -121,6 +145,9 @@ CREATE TABLE IF NOT EXISTS `s1_news` (
 -- 
 -- Tabellenstruktur für Tabelle `s1_pics`
 -- 
+-- Erzeugt am: 18. März 2007 um 16:12
+-- Aktualisiert am: 18. März 2007 um 17:12
+-- 
 
 DROP TABLE IF EXISTS `s1_pics`;
 CREATE TABLE IF NOT EXISTS `s1_pics` (
@@ -137,7 +164,32 @@ CREATE TABLE IF NOT EXISTS `s1_pics` (
 -- --------------------------------------------------------
 
 -- 
+-- Tabellenstruktur für Tabelle `s1_pmmessages`
+-- 
+-- Erzeugt am: 18. Juli 2007 um 15:01
+-- Aktualisiert am: 18. Juli 2007 um 15:01
+-- 
+
+DROP TABLE IF EXISTS `s1_pmmessages`;
+CREATE TABLE IF NOT EXISTS `s1_pmmessages` (
+  `id` int(11) NOT NULL auto_increment,
+  `idabse` int(11) NOT NULL,
+  `idempf` int(11) NOT NULL,
+  `betreff` text collate latin1_general_ci NOT NULL,
+  `message` text collate latin1_general_ci NOT NULL,
+  `date` datetime NOT NULL,
+  `status` enum('gelesen','ungelesen','neu') collate latin1_general_ci NOT NULL,
+  `folder` varchar(255) collate latin1_general_ci NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=13 ;
+
+-- --------------------------------------------------------
+
+-- 
 -- Tabellenstruktur für Tabelle `s1_sessions`
+-- 
+-- Erzeugt am: 18. Juli 2007 um 16:11
+-- Aktualisiert am: 18. Juli 2007 um 16:51
 -- 
 
 DROP TABLE IF EXISTS `s1_sessions`;
@@ -149,12 +201,37 @@ CREATE TABLE IF NOT EXISTS `s1_sessions` (
   `erstellt` text NOT NULL,
   `erstellt_date` date NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=150 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Tabellenstruktur für Tabelle `s1_ships`
+-- 
+-- Erzeugt am: 18. Juli 2007 um 16:12
+-- Aktualisiert am: 18. Juli 2007 um 16:12
+-- 
+
+DROP TABLE IF EXISTS `s1_ships`;
+CREATE TABLE IF NOT EXISTS `s1_ships` (
+  `id` int(11) NOT NULL auto_increment,
+  `userid` int(11) NOT NULL,
+  `shipname` varchar(255) collate latin1_general_ci NOT NULL,
+  `shipfilename` varchar(255) collate latin1_general_ci NOT NULL,
+  `inhalt_db_id` int(11) NOT NULL,
+  `waffen_db_id` int(11) NOT NULL,
+  `healt` varchar(255) collate latin1_general_ci NOT NULL,
+  `shield` varchar(255) collate latin1_general_ci NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
 -- 
 -- Tabellenstruktur für Tabelle `s1_sites`
+-- 
+-- Erzeugt am: 18. Juli 2007 um 15:04
+-- Aktualisiert am: 18. Juli 2007 um 15:12
 -- 
 
 DROP TABLE IF EXISTS `s1_sites`;
@@ -165,13 +242,18 @@ CREATE TABLE IF NOT EXISTS `s1_sites` (
   `feld` int(11) NOT NULL,
   `feldpos` int(11) NOT NULL,
   `type` enum('user','system','modul') NOT NULL,
+  `acces_groups` varchar(255) NOT NULL,
+  `params` text NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 -- --------------------------------------------------------
 
 -- 
 -- Tabellenstruktur für Tabelle `s1_todo`
+-- 
+-- Erzeugt am: 18. März 2007 um 16:12
+-- Aktualisiert am: 18. März 2007 um 17:12
 -- 
 
 DROP TABLE IF EXISTS `s1_todo`;
@@ -187,6 +269,9 @@ CREATE TABLE IF NOT EXISTS `s1_todo` (
 -- 
 -- Tabellenstruktur für Tabelle `s1_users`
 -- 
+-- Erzeugt am: 04. April 2007 um 14:24
+-- Aktualisiert am: 13. Juni 2007 um 20:53
+-- 
 
 DROP TABLE IF EXISTS `s1_users`;
 CREATE TABLE IF NOT EXISTS `s1_users` (
@@ -200,4 +285,4 @@ CREATE TABLE IF NOT EXISTS `s1_users` (
   `class` int(11) NOT NULL,
   `group` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=6 ;

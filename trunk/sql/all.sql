@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Erstellungszeit: 04. April 2007 um 15:05
+-- Erstellungszeit: 18. Juli 2007 um 16:55
 -- Server Version: 5.0.27
 -- PHP-Version: 5.2.0
 -- 
@@ -15,6 +15,9 @@
 -- 
 -- Tabellenstruktur für Tabelle `s1_acces`
 -- 
+-- Erzeugt am: 04. April 2007 um 14:52
+-- Aktualisiert am: 18. Juli 2007 um 15:07
+-- 
 
 DROP TABLE IF EXISTS `s1_acces`;
 CREATE TABLE IF NOT EXISTS `s1_acces` (
@@ -22,17 +25,22 @@ CREATE TABLE IF NOT EXISTS `s1_acces` (
   `file` varchar(255) collate latin1_general_ci NOT NULL,
   `acces_groups` varchar(255) collate latin1_general_ci NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3 ;
 
 -- 
 -- Daten für Tabelle `s1_acces`
 -- 
 
+INSERT IGNORE INTO `s1_acces` (`id`, `file`, `acces_groups`) VALUES (1, 'ghaupt.site', '1');
+INSERT IGNORE INTO `s1_acces` (`id`, `file`, `acces_groups`) VALUES (2, 'pminterface.php', '1');
 
 -- --------------------------------------------------------
 
 -- 
 -- Tabellenstruktur für Tabelle `s1_admin`
+-- 
+-- Erzeugt am: 18. März 2007 um 16:12
+-- Aktualisiert am: 18. März 2007 um 17:24
 -- 
 
 DROP TABLE IF EXISTS `s1_admin`;
@@ -49,12 +57,15 @@ CREATE TABLE IF NOT EXISTS `s1_admin` (
 -- Daten für Tabelle `s1_admin`
 -- 
 
-INSERT INTO `s1_admin` VALUES (13, 'fkrauthan', 'deba5ebc6d72f0bafb498aa7a73300ea', '127.0.0.1', 'dbakeyspacequester');
+INSERT IGNORE INTO `s1_admin` (`id`, `name`, `password`, `ip`, `securekey`) VALUES (13, 'fkrauthan', 'deba5ebc6d72f0bafb498aa7a73300ea', '127.0.0.1', 'dbakeyspacequester');
 
 -- --------------------------------------------------------
 
 -- 
 -- Tabellenstruktur für Tabelle `s1_admin_menue`
+-- 
+-- Erzeugt am: 18. März 2007 um 16:12
+-- Aktualisiert am: 18. März 2007 um 17:25
 -- 
 
 DROP TABLE IF EXISTS `s1_admin_menue`;
@@ -69,15 +80,18 @@ CREATE TABLE IF NOT EXISTS `s1_admin_menue` (
 -- Daten für Tabelle `s1_admin_menue`
 -- 
 
-INSERT INTO `s1_admin_menue` VALUES (8, 'Übersicht', 'main.php?ltarget=global');
-INSERT INTO `s1_admin_menue` VALUES (9, 'Admin''s', 'main.php?ltarget=admins');
-INSERT INTO `s1_admin_menue` VALUES (10, 'UserSites', 'main.php?ltarget=usites');
-INSERT INTO `s1_admin_menue` VALUES (11, 'Module', 'main.php?ltarget=module');
+INSERT IGNORE INTO `s1_admin_menue` (`id`, `name`, `target`) VALUES (8, 'Übersicht', 'main.php?ltarget=global');
+INSERT IGNORE INTO `s1_admin_menue` (`id`, `name`, `target`) VALUES (9, 'Admin''s', 'main.php?ltarget=admins');
+INSERT IGNORE INTO `s1_admin_menue` (`id`, `name`, `target`) VALUES (10, 'UserSites', 'main.php?ltarget=usites');
+INSERT IGNORE INTO `s1_admin_menue` (`id`, `name`, `target`) VALUES (11, 'Module', 'main.php?ltarget=module');
 
 -- --------------------------------------------------------
 
 -- 
 -- Tabellenstruktur für Tabelle `s1_gbuch`
+-- 
+-- Erzeugt am: 18. März 2007 um 16:12
+-- Aktualisiert am: 18. März 2007 um 17:12
 -- 
 
 DROP TABLE IF EXISTS `s1_gbuch`;
@@ -101,6 +115,9 @@ CREATE TABLE IF NOT EXISTS `s1_gbuch` (
 -- 
 -- Tabellenstruktur für Tabelle `s1_links`
 -- 
+-- Erzeugt am: 18. März 2007 um 16:12
+-- Aktualisiert am: 18. März 2007 um 17:12
+-- 
 
 DROP TABLE IF EXISTS `s1_links`;
 CREATE TABLE IF NOT EXISTS `s1_links` (
@@ -120,30 +137,42 @@ CREATE TABLE IF NOT EXISTS `s1_links` (
 -- 
 -- Tabellenstruktur für Tabelle `s1_menue`
 -- 
+-- Erzeugt am: 18. Juli 2007 um 14:30
+-- Aktualisiert am: 18. Juli 2007 um 16:49
+-- 
 
 DROP TABLE IF EXISTS `s1_menue`;
 CREATE TABLE IF NOT EXISTS `s1_menue` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(255) NOT NULL,
   `target` varchar(255) NOT NULL,
-  `log` int(1) NOT NULL,
+  `acces_groups` varchar(255) NOT NULL,
+  `menue_id` int(11) NOT NULL,
+  `top_entry` int(11) NOT NULL,
+  `pos` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 -- 
 -- Daten für Tabelle `s1_menue`
 -- 
 
-INSERT INTO `s1_menue` VALUES (10, 'Home', 'main.php?target=home', 0);
-INSERT INTO `s1_menue` VALUES (11, 'News', 'main.php?starget=news', 0);
-INSERT INTO `s1_menue` VALUES (12, 'Gästebuch', 'main.php?starget=gbuch', 0);
-INSERT INTO `s1_menue` VALUES (13, 'Regiestrieren', 'main.php?starget=reg', 0);
-INSERT INTO `s1_menue` VALUES (14, 'Login', 'main.php?starget=loginpanel', 0);
+INSERT IGNORE INTO `s1_menue` (`id`, `name`, `target`, `acces_groups`, `menue_id`, `top_entry`, `pos`) VALUES (10, 'Home', 'main.php?target=home', '', 0, 0, 0);
+INSERT IGNORE INTO `s1_menue` (`id`, `name`, `target`, `acces_groups`, `menue_id`, `top_entry`, `pos`) VALUES (11, 'News', 'main.php?starget=news', '', 0, 0, 1);
+INSERT IGNORE INTO `s1_menue` (`id`, `name`, `target`, `acces_groups`, `menue_id`, `top_entry`, `pos`) VALUES (12, 'Gästebuch', 'main.php?starget=gbuch', '', 0, 0, 2);
+INSERT IGNORE INTO `s1_menue` (`id`, `name`, `target`, `acces_groups`, `menue_id`, `top_entry`, `pos`) VALUES (13, 'Regiestrieren', 'main.php?starget=reg', '', 0, 0, 3);
+INSERT IGNORE INTO `s1_menue` (`id`, `name`, `target`, `acces_groups`, `menue_id`, `top_entry`, `pos`) VALUES (14, 'Login', 'main.php?starget=loginpanel', '', 0, 0, 4);
+INSERT IGNORE INTO `s1_menue` (`id`, `name`, `target`, `acces_groups`, `menue_id`, `top_entry`, `pos`) VALUES (15, 'Übersicht', 'main.php?target=ghaupt', '1', 1, 0, 0);
+INSERT IGNORE INTO `s1_menue` (`id`, `name`, `target`, `acces_groups`, `menue_id`, `top_entry`, `pos`) VALUES (16, 'PM Nachrichten', 'main.php?starget=pminterface', '1', 1, 0, 1);
+INSERT IGNORE INTO `s1_menue` (`id`, `name`, `target`, `acces_groups`, `menue_id`, `top_entry`, `pos`) VALUES (17, 'Logout', 'main.php?starget=logout', '1', 1, 0, 2);
 
 -- --------------------------------------------------------
 
 -- 
 -- Tabellenstruktur für Tabelle `s1_news`
+-- 
+-- Erzeugt am: 18. März 2007 um 16:36
+-- Aktualisiert am: 18. März 2007 um 17:38
 -- 
 
 DROP TABLE IF EXISTS `s1_news`;
@@ -160,12 +189,15 @@ CREATE TABLE IF NOT EXISTS `s1_news` (
 -- Daten für Tabelle `s1_news`
 -- 
 
-INSERT INTO `s1_news` VALUES (1, 'NeuAnfang', 'Ich habe heute damit begonnen das Komplete Browsergame neu\r\nzu schreiben. Als grundlage dient nun das Phönix View CMS\r\nwas eine Leichtere Modul verwaltung und einfachere Template\r\nEinsetzung ermöglicht. Ich werde schaun das ich nach dem\r\nSki Lager anfange teile die gut funktionirt haben zu\r\nportiren und den Style an den alten SpaceQuester Style\r\nanpassen.\r\nMFG,\r\nfkrauthan', '18.03.2007 16:36:36', 'fkrauthan');
+INSERT IGNORE INTO `s1_news` (`id`, `topic`, `text`, `date`, `autor`) VALUES (1, 'NeuAnfang', 'Ich habe heute damit begonnen das Komplete Browsergame neu\r\nzu schreiben. Als grundlage dient nun das Phönix View CMS\r\nwas eine Leichtere Modul verwaltung und einfachere Template\r\nEinsetzung ermöglicht. Ich werde schaun das ich nach dem\r\nSki Lager anfange teile die gut funktionirt haben zu\r\nportiren und den Style an den alten SpaceQuester Style\r\nanpassen.\r\nMFG,\r\nfkrauthan', '18.03.2007 16:36:36', 'fkrauthan');
 
 -- --------------------------------------------------------
 
 -- 
 -- Tabellenstruktur für Tabelle `s1_pics`
+-- 
+-- Erzeugt am: 18. März 2007 um 16:12
+-- Aktualisiert am: 18. März 2007 um 17:12
 -- 
 
 DROP TABLE IF EXISTS `s1_pics`;
@@ -188,7 +220,37 @@ CREATE TABLE IF NOT EXISTS `s1_pics` (
 -- --------------------------------------------------------
 
 -- 
+-- Tabellenstruktur für Tabelle `s1_pmmessages`
+-- 
+-- Erzeugt am: 18. Juli 2007 um 15:01
+-- Aktualisiert am: 18. Juli 2007 um 15:01
+-- 
+
+DROP TABLE IF EXISTS `s1_pmmessages`;
+CREATE TABLE IF NOT EXISTS `s1_pmmessages` (
+  `id` int(11) NOT NULL auto_increment,
+  `idabse` int(11) NOT NULL,
+  `idempf` int(11) NOT NULL,
+  `betreff` text collate latin1_general_ci NOT NULL,
+  `message` text collate latin1_general_ci NOT NULL,
+  `date` datetime NOT NULL,
+  `status` enum('gelesen','ungelesen','neu') collate latin1_general_ci NOT NULL,
+  `folder` varchar(255) collate latin1_general_ci NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=13 ;
+
+-- 
+-- Daten für Tabelle `s1_pmmessages`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
 -- Tabellenstruktur für Tabelle `s1_sessions`
+-- 
+-- Erzeugt am: 18. Juli 2007 um 16:11
+-- Aktualisiert am: 18. Juli 2007 um 16:51
 -- 
 
 DROP TABLE IF EXISTS `s1_sessions`;
@@ -200,23 +262,49 @@ CREATE TABLE IF NOT EXISTS `s1_sessions` (
   `erstellt` text NOT NULL,
   `erstellt_date` date NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=150 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- 
 -- Daten für Tabelle `s1_sessions`
 -- 
 
-INSERT INTO `s1_sessions` VALUES (148, '75k0snvds4p642q', '', '', '1175691113', '2007-04-04');
-INSERT INTO `s1_sessions` VALUES (149, 'l4m7xsk8sthg2', 'JavaScript|#|style|#|sitentitle|#|Cookies|#|lastaction|#|ltarget|#|target|#|starget|#|login|#|acces|#|adminskey|#|adminid|#|lastsecaction', '1|#|spacequester|#|home|#|1|#|2|#|module|#|home|#|admin|#|2#|#fkrauthan|#|1|#|adminkeySpecial123|#|13|#|', '1175691806', '2007-04-04');
-INSERT INTO `s1_sessions` VALUES (147, 'fy4g59hkwpyav6c', 'JavaScript|#|style|#|sitentitle|#|Cookies|#|lastaction|#|ltarget|#|target|#|login|#|acces|#|starget', '1|#|spacequester|#|home|#|1|#|1|#||#|home|#|2#|#fkrauthan|#|0|#|news', '1175691106', '2007-04-04');
-INSERT INTO `s1_sessions` VALUES (146, '92pq0n4860u055f', '', '', '1175690837', '2007-04-04');
-INSERT INTO `s1_sessions` VALUES (144, '5uc8eh80830b2o4', '', '', '1175688537', '2007-04-04');
-INSERT INTO `s1_sessions` VALUES (145, 'y4mq384u0kb4789', 'JavaScript|#|style|#|sitentitle|#|Cookies|#|target|#|login|#|lastaction|#|ltarget|#|starget', '1|#|spacequester|#|home|#|1|#|home|#|2#|#fkrauthan|#|2|#||#|news', '1175690822', '2007-04-04');
+INSERT IGNORE INTO `s1_sessions` (`id`, `sessionid`, `namea`, `valuea`, `erstellt`, `erstellt_date`) VALUES (1, '77c521l55k74e', 'JavaScript|#|style|#|sitentitle|#|Cookies|#|lastaction|#|target|#|ship|#|starget|#|adminskey|#|adminid', '1|#|spacequester|#|home|#|1|#|2|#|ghaupt|#|1#|#My Ship|#|impressum|#|adminkeySpecial123|#|13', '1184770291', '2007-07-18');
+
+-- --------------------------------------------------------
+
+-- 
+-- Tabellenstruktur für Tabelle `s1_ships`
+-- 
+-- Erzeugt am: 18. Juli 2007 um 16:12
+-- Aktualisiert am: 18. Juli 2007 um 16:12
+-- 
+
+DROP TABLE IF EXISTS `s1_ships`;
+CREATE TABLE IF NOT EXISTS `s1_ships` (
+  `id` int(11) NOT NULL auto_increment,
+  `userid` int(11) NOT NULL,
+  `shipname` varchar(255) collate latin1_general_ci NOT NULL,
+  `shipfilename` varchar(255) collate latin1_general_ci NOT NULL,
+  `inhalt_db_id` int(11) NOT NULL,
+  `waffen_db_id` int(11) NOT NULL,
+  `healt` varchar(255) collate latin1_general_ci NOT NULL,
+  `shield` varchar(255) collate latin1_general_ci NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
+
+-- 
+-- Daten für Tabelle `s1_ships`
+-- 
+
+INSERT IGNORE INTO `s1_ships` (`id`, `userid`, `shipname`, `shipfilename`, `inhalt_db_id`, `waffen_db_id`, `healt`, `shield`) VALUES (1, 2, 'My Ship', 'bvfighter.xml', 0, 0, '500#500', '500#500');
 
 -- --------------------------------------------------------
 
 -- 
 -- Tabellenstruktur für Tabelle `s1_sites`
+-- 
+-- Erzeugt am: 18. Juli 2007 um 15:04
+-- Aktualisiert am: 18. Juli 2007 um 15:12
 -- 
 
 DROP TABLE IF EXISTS `s1_sites`;
@@ -227,24 +315,29 @@ CREATE TABLE IF NOT EXISTS `s1_sites` (
   `feld` int(11) NOT NULL,
   `feldpos` int(11) NOT NULL,
   `type` enum('user','system','modul') NOT NULL,
+  `acces_groups` varchar(255) NOT NULL,
+  `params` text NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 -- 
 -- Daten für Tabelle `s1_sites`
 -- 
 
-INSERT INTO `s1_sites` VALUES (9, 'UserPanel', 'userpanel.php', 1, 0, 'system');
-INSERT INTO `s1_sites` VALUES (10, 'Menue', 'menue.php', 2, 0, 'system');
-INSERT INTO `s1_sites` VALUES (11, 'InhaltderWebseite', 'frame.php', 3, 0, 'system');
-INSERT INTO `s1_sites` VALUES (12, 'LoginPanel', 'loginpanel.php', 2, 0, 'system');
-INSERT INTO `s1_sites` VALUES (13, 'Game InfoBar', 'infobar.php', 4, 0, 'system');
-INSERT INTO `s1_sites` VALUES (14, 'Game Menü', 'menue.php', 5, 0, 'system');
+INSERT IGNORE INTO `s1_sites` (`id`, `name`, `adress`, `feld`, `feldpos`, `type`, `acces_groups`, `params`) VALUES (9, 'UserPanel', 'userpanel.php', 1, 0, 'system', '', '');
+INSERT IGNORE INTO `s1_sites` (`id`, `name`, `adress`, `feld`, `feldpos`, `type`, `acces_groups`, `params`) VALUES (10, 'Menue', 'menue.php', 2, 0, 'system', '0', '$MENUE_NAME=''Menü'';');
+INSERT IGNORE INTO `s1_sites` (`id`, `name`, `adress`, `feld`, `feldpos`, `type`, `acces_groups`, `params`) VALUES (11, 'InhaltderWebseite', 'frame.php', 3, 0, 'system', '', '');
+INSERT IGNORE INTO `s1_sites` (`id`, `name`, `adress`, `feld`, `feldpos`, `type`, `acces_groups`, `params`) VALUES (12, 'LoginPanel', 'loginpanel.php', 2, 1, 'system', '0', '');
+INSERT IGNORE INTO `s1_sites` (`id`, `name`, `adress`, `feld`, `feldpos`, `type`, `acces_groups`, `params`) VALUES (13, 'Game InfoBar', 'infobar.php', 4, 0, 'system', '', '');
+INSERT IGNORE INTO `s1_sites` (`id`, `name`, `adress`, `feld`, `feldpos`, `type`, `acces_groups`, `params`) VALUES (15, 'InGameMenü', 'menue.php', 2, 0, 'system', '1', '$MENUE_NAME=''Navigation'';\r\n$MENUE_ID=''1'';');
 
 -- --------------------------------------------------------
 
 -- 
 -- Tabellenstruktur für Tabelle `s1_todo`
+-- 
+-- Erzeugt am: 18. März 2007 um 16:12
+-- Aktualisiert am: 18. März 2007 um 17:12
 -- 
 
 DROP TABLE IF EXISTS `s1_todo`;
@@ -265,6 +358,9 @@ CREATE TABLE IF NOT EXISTS `s1_todo` (
 -- 
 -- Tabellenstruktur für Tabelle `s1_users`
 -- 
+-- Erzeugt am: 04. April 2007 um 14:24
+-- Aktualisiert am: 13. Juni 2007 um 20:53
+-- 
 
 DROP TABLE IF EXISTS `s1_users`;
 CREATE TABLE IF NOT EXISTS `s1_users` (
@@ -278,10 +374,13 @@ CREATE TABLE IF NOT EXISTS `s1_users` (
   `class` int(11) NOT NULL,
   `group` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=6 ;
 
 -- 
 -- Daten für Tabelle `s1_users`
 -- 
 
-INSERT INTO `s1_users` VALUES (2, 'fkrauthan', 'deba5ebc6d72f0bafb498aa7a73300ea', 'fkrauthan@gmx.net', 'Florian Krauthan', '0000-00-00', '', 0, 1);
+INSERT IGNORE INTO `s1_users` (`id`, `uname`, `pass`, `email`, `rname`, `gyear`, `rkey`, `class`, `group`) VALUES (2, 'fkrauthan', 'deba5ebc6d72f0bafb498aa7a73300ea', 'fkrauthan@gmx.net', 'Florian Krauthan', '0000-00-00', '', 0, 1);
+INSERT IGNORE INTO `s1_users` (`id`, `uname`, `pass`, `email`, `rname`, `gyear`, `rkey`, `class`, `group`) VALUES (3, 'PMTheQuick', '982df3ceccf25e6231970e8504dddf77', 'pamado@interGGA.ch', 'Pascal Mathis', '0000-00-00', '7q34V900Iy23OAKeT1', 0, 1);
+INSERT IGNORE INTO `s1_users` (`id`, `uname`, `pass`, `email`, `rname`, `gyear`, `rkey`, `class`, `group`) VALUES (4, 'ch100', '131ab0607605332bea6a53a7bff79bc0', 'ch100@gmx.net', '', '0000-00-00', '', 0, 1);
+INSERT IGNORE INTO `s1_users` (`id`, `uname`, `pass`, `email`, `rname`, `gyear`, `rkey`, `class`, `group`) VALUES (5, 'DerBlonde', '3cea65f5d20072cb93abb02bdd4b62c2', 'Matthias_Lochbrunner@web.de', 'Matthias', '0000-00-00', '', 0, 1);

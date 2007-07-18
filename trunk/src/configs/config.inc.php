@@ -50,7 +50,7 @@ define("SYSTEM_PIC_path",	   "daten/pictures/"); # Pfad zu den Bildern
 #Sicherheits schlüssel
 define("SYSTEM_ADMIN_lkey",    "loginkeySpecial123"); #loign secrutiy key
 define("SYSTEM_ADMIN_skey",    "adminkeySpecial123"); #admin secrutiy key
-define("SYSTEM_ADMIN_dkey",    "dbasekeySpecial123"); #db admin secrutiy key
+define("SYSTEM_ADMIN_dkey",    "dbakeyspacequester"); #db admin secrutiy key
 
 #Session Verwatlung
 define("SYSTEM_SESSION_mod",   "1"); #1 Bei Mysql Session verwatlung und 2 bei TextFileSessio verwatlung 

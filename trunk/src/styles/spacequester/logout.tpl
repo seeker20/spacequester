@@ -3,7 +3,7 @@
 <p><a href='main.php'>Weiter...</a></p>
 <script language="JavaScript">
 <!--
-	location.href='main.php';
+	location.href='main.php?starget=loginpanel';
 //-->
 </script>
 {/LOGOUTSUCCES}
