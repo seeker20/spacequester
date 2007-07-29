@@ -1,6 +1,6 @@
 <?php include "configs/game.inc.php"; $db = new db();?>
 
-<h3>Übersicht</h3>
+<h3>&Uuml;bersicht</h3>
 
 <?php 
 	if(isset($_POST["ls"])) {
@@ -69,14 +69,14 @@
 	
 	if(!isset($_SESSION["ship"])||$_SESSION["ship"]=="") { 
 	?>
-		<p>Sie scheinen sich das erste mal anzumelden. Daher müssen sie sich noch für eine Klasse entscheiden.
-		   Die klasse hat vorallem auswirkung auf die Quests die ihnen gestellt werden. Wählen sie einfach eine Klasse aus 
+		<p>Sie scheinen sich das erste mal anzumelden. Daher m&uuml;ssen sie sich noch für eine Klasse entscheiden.
+		   Die klasse hat vorallem auswirkung auf die Quests die ihnen gestellt werden. W&auml;hlen sie einfach eine Klasse aus 
 		   und Klicken sie auf "Los Gehts!". Bitte beachten sie das sie auch wenn sie z.b. Pirat sind auch Handeln
-		   können. Es geht einzig und alleine um die Quests. Wählen sie nun zuerst ihre Klasse.</p>
+		   k&ouml;nnen. Es geht einzig und alleine um die Quests. W&auml;hlen sie nun zuerst ihre Klasse.</p>
 		<form action='main.php' method='post'>   
 			<p>Beruf: <select name='beruf' size='1'>
-						<option value='1'>Söldner</option>
-						<option value='2'>Händler</option>
+						<option value='1'>S&ouml;ldner</option>
+						<option value='2'>H&auml;ndler</option>
 						<option value='3'>Polizei</option>
 						<option value='4'>Pirat</option>
 					  </select></p>
