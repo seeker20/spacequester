@@ -69,7 +69,7 @@
 	
 	if(!isset($_SESSION["ship"])||$_SESSION["ship"]=="") { 
 	?>
-		<p>Sie scheinen sich das erste mal anzumelden. Daher m&uuml;ssen sie sich noch für eine Klasse entscheiden.
+		<p>Sie scheinen sich das erste mal anzumelden. Daher m&uuml;ssen sie sich noch f&uuml;r eine Klasse entscheiden.
 		   Die klasse hat vorallem auswirkung auf die Quests die ihnen gestellt werden. W&auml;hlen sie einfach eine Klasse aus 
 		   und Klicken sie auf "Los Gehts!". Bitte beachten sie das sie auch wenn sie z.b. Pirat sind auch Handeln
 		   k&ouml;nnen. Es geht einzig und alleine um die Quests. W&auml;hlen sie nun zuerst ihre Klasse.</p>
