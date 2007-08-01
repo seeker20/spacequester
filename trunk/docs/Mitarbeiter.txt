@@ -1,8 +1,0 @@
-In Diesem Document werden alle mitarbeiter und ihre Funtionen aufgelsitet gegebenenfalls auch ihre 
-Kontak adressen.
-
-|----------------|----------|------------------|-----------|-----------------|--------------------------|
-|     Name       | Username |     E-mail       | ICQ/AIM   |       MSN       |          Aufgabe         |
-|----------------|----------|------------------|-----------|-----------------|--------------------------|
-|Florian Krauthan|fkrauthan |fkrauthan@gmx.net | fkrauthan |fkrauthan@gmx.net|Projektleiter/Programierer|
-|----------------|----------|------------------|-----------|-----------------|--------------------------|
