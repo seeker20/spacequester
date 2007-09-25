@@ -345,7 +345,7 @@ if($action == "write_mail")
 }
 				?>
 				<br><br>
-				<img src=../daten/bilder/server.png width=100 height=100>
+				<!--<img src=../daten/bilder/server.png width=100 height=100>!-->
 			</div>
 
 			<br>
