@@ -232,13 +232,13 @@ else if($ac==3) {
 		}
 		
 		if($text=='') {
-			echo "<p>Sie m�ssen einen Text angeben oder sie verwenden HTML code.</p>";
+			echo "<p>Sie m&uuml;ssen einen Text angeben oder sie verwenden HTML code.</p>";
 		}
 		else if(strlen($text) > 5000) {
 			echo "<p>Zuviele Zeichen h&ouml;chtens 5000</p>";
 		}
 		else if(!bbcodetest($text)) {
-			echo "<p>Der BB-Code beinhaltet fehler bitte &uuml;berpr�fen sie ihn.</p>";
+			echo "<p>Der BB-Code beinhaltet fehler bitte &uuml;berpr&uuml;fen sie ihn.</p>";
 		}
 		else {
 			if($t==1)
@@ -258,7 +258,7 @@ else if($ac==3) {
 	echo "<tr><td class='hsmallborder' align='center'><b>Allianz verwalten</b></td></tr>";
 	echo "<tr><td class='hsmallborder' align='center'><a style='text-decoration: none;' href='main.php?target=ally&ac=6'>Rechte Verwalten</a></td></tr>";
 	echo "<tr><td class='hsmallborder' align='center'><a style='text-decoration: none;' href='main.php?target=ally&ac=7'>Rechte Vergeben</a></td></tr>";
-	echo "<tr><td class='hsmallborder' align='center'><a style='text-decoration: none;' href='main.php?target=ally&ac=4'>AllyName �ndern</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a style='text-decoration: none;' href='main.php?target=ally&ac=5'>AllyTag �ndern</a></td></tr>";
+	echo "<tr><td class='hsmallborder' align='center'><a style='text-decoration: none;' href='main.php?target=ally&ac=4'>AllyName &auml;ndern</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a style='text-decoration: none;' href='main.php?target=ally&ac=5'>AllyTag &auml;ndern</a></td></tr>";
 	echo "</table>";
 	echo "<br><br>";
 	echo "<table border='0' class='smallborder' cellspacing='0' cellpadding='0' width='90%'>";
@@ -316,10 +316,10 @@ else if($ac==4) {
 		$name = strip_tags($name);
 		
 		if($name=='') {
-			echo "<font color='red'>Sie m�ssen einen Allianz Namen angeben.</font><br><br>";
+			echo "<font color='red'>Sie m&uuml;ssen einen Allianz Namen angeben.</font><br><br>";
 		}
 		else if(strlen($name) > 35) {
-			echo "<font color='red'>Zeichen Maximum �berschritten.</font><br><br>";
+			echo "<font color='red'>Zeichen Maximum &uuml;berschritten.</font><br><br>";
 		}
 		else {
 			$sqlab = "select * from alianzen where name='" . $name . "'";
@@ -331,7 +331,7 @@ else if($ac==4) {
 				$sqlab = "update alianzen set name='" . $name . "' where id='" . $userhomeali . "'";
 				mysql_query($sqlab);
 		
-				echo "<font color='green'>Name erfolgreich ge�ndert</font><br><br>";
+				echo "<font color='green'>Name erfolgreich ge&auml;ndert</font><br><br>";
 			}
 		}
 	}
@@ -344,7 +344,7 @@ else if($ac==4) {
 	
 	echo "<form action='main.php' method='post'>";
 	echo "<table border='0' class='smallborder' cellspacing='0' cellpadding='0' width='90%'>";
-	echo "<tr><td colspan='2' class='hsmallborder' align='center'><b>Wie soll die Allianz \"" . $allyname . "\" k&uuml;nftig hei�en?<b></td></tr>";
+	echo "<tr><td colspan='2' class='hsmallborder' align='center'><b>Wie soll die Allianz \"" . $allyname . "\" k&uuml;nftig heissen?<b></td></tr>";
 	echo "<tr><td width='40%' class='hsmallborder' align='center'>Neuer Name (max. 35 Zeichen):</td><td class='hsmallborder' align='center'><br><input type='text' maxlength='35' name='nname' value='" . $allyname . "'>&nbsp;&nbsp;<input type='submit' value='&Auml;ndern'>&nbsp;&nbsp;<input type='reset' value='Abbrechen'><br><br></td></tr>";
 	echo "</table>";
 	
@@ -364,10 +364,10 @@ else if($ac==5) {
 		$name = strip_tags($name);
 		
 		if($name=='') {
-			echo "<font color='red'>Sie m�ssen ein Allianz Tag angeben.</font><br><br>";
+			echo "<font color='red'>Sie m&uuml;ssen ein Allianz Tag angeben.</font><br><br>";
 		}
 		else if(strlen($name) > 8||strlen($name) < 3) {
-			echo "<font color='red'>Zeichen Maximum �berschritten oder minimum unterschritten.</font><br><br>";
+			echo "<font color='red'>Zeichen Maximum &uuml;berschritten oder minimum unterschritten.</font><br><br>";
 		}
 		else {
 			$sqlab = "select * from alianzen where tag='" . $name . "'";
@@ -379,7 +379,7 @@ else if($ac==5) {
 				$sqlab = "update alianzen set tag='" . $name . "' where id='" . $userhomeali . "'";
 				mysql_query($sqlab);
 		
-				echo "<font color='green'>Tag erfolgreich ge�ndert</font><br><br>";
+				echo "<font color='green'>Tag erfolgreich ge&auml;ndert</font><br><br>";
 			}
 		}
 	}
@@ -392,7 +392,7 @@ else if($ac==5) {
 	
 	echo "<form action='main.php' method='post'>";
 	echo "<table border='0' class='smallborder' cellspacing='0' cellpadding='0' width='90%'>";
-	echo "<tr><td colspan='2' class='hsmallborder' align='center'><b>Wie soll der Allianz Tag \"" . $allytag . "\" k&uuml;nftig hei�en?<b></td></tr>";
+	echo "<tr><td colspan='2' class='hsmallborder' align='center'><b>Wie soll der Allianz Tag \"" . $allytag . "\" k&uuml;nftig heissen?<b></td></tr>";
 	echo "<tr><td width='40%' class='hsmallborder' align='center'>Neuer Tag (3-8 Zeichen):</td><td class='hsmallborder' align='center'><br><input type='text' maxlength='8' name='ntag' value='" . $allytag . "'>&nbsp;&nbsp;<input type='submit' value='&Auml;ndern'>&nbsp;&nbsp;<input type='reset' value='Abbrechen'><br><br></td></tr>";
 	echo "</table>";
 	
@@ -413,7 +413,7 @@ else if($ac==6) {
 			$name = strip_tags($name);
 			
 			if($name=='') {
-				echo "<font color='red'>Sie m�ssen einen Rang namen angeben.</font><br><br>";
+				echo "<font color='red'>Sie m&uuml;ssen einen Rang namen angeben.</font><br><br>";
 			}
 			else {
 				$sqlab = "select * from allyraenge where name='" . $name . "' and allyid='" . $userhomeali . "'";
@@ -426,7 +426,7 @@ else if($ac==6) {
 					$sqlab .= "NULL , '" . $userhomeali . "', '" . $name . "')";
 					mysql_query($sqlab);
 		
-					echo "<font color='green'>Recht wurde erfolgreich hinzugef�gt.</font><br><br>";
+					echo "<font color='green'>Recht wurde erfolgreich hinzugef&uuml;gt.</font><br><br>";
 				}
 			}
 		}
@@ -450,7 +450,7 @@ else if($ac==6) {
 				if(isset($_POST["AV_" . $ids[$i]])) $AV = true;
 				
 				if($name=='') {
-					echo "<font color='red'>Sie m�ssen einen Rang namen angeben.</font><br><br>";
+					echo "<font color='red'>Sie m&uuml;ssen einen Rang namen angeben.</font><br><br>";
 				}
 				else {
 					$sqlab = "select * from allyraenge where name='" . $name . "' and allyid='" . $userhomeali . "'";
@@ -481,7 +481,7 @@ else if($ac==6) {
 		else {
 			$sqlab = "delete from allyraenge where id='" . $lid . "'";
 			mysql_query($sqlab);
-			echo "<font color='green'>Rang erfolgreich gel�scht.</font><br><br>";
+			echo "<font color='green'>Rang erfolgreich gel&ouml;scht.</font><br><br>";
 		}
 	}
 	
@@ -554,9 +554,9 @@ else if($ac==6) {
 	echo "<br>";
 	echo "<table border='0' class='smallborder' cellspacing='0' cellpadding='0' width='90%'>";
 	echo "<tr><td class='hsmallborder' colspan='2' align='center'><b>Legende der Rechte</b></td></tr>";
-	echo "<tr><td class='hsmallborder' align='center' width='20%'>L</td><td class='hsmallborder' align='center'>Eintrag l�schen</td></tr>";
+	echo "<tr><td class='hsmallborder' align='center' width='20%'>L</td><td class='hsmallborder' align='center'>Eintrag l&ouml;schen</td></tr>";
 	
-	echo "<tr><td class='hsmallborder' align='center' width='20%'>AA</td><td class='hsmallborder' align='center'>Allianz aufl�sen</td></tr>";
+	echo "<tr><td class='hsmallborder' align='center' width='20%'>AA</td><td class='hsmallborder' align='center'>Allianz aufl&ouml;sen</td></tr>";
 	echo "<tr><td class='hsmallborder' align='center' width='20%'>UK</td><td class='hsmallborder' align='center'>User kicken</td></tr>";
 	echo "<tr><td class='hsmallborder' align='center' width='20%'>BW</td><td class='hsmallborder' align='center'>Bewerbungen bearbetien und einsehen</td></tr>";
 	echo "<tr><td class='hsmallborder' align='center' width='20%'>ML</td><td class='hsmallborder' align='center'>Mitglieder sehen</td></tr>";
@@ -577,10 +577,10 @@ else if($ac==7) {
 			if($rang!='') {
 				$sqlab= "update users set rangid='" . $rang . "' where id='" . $ids[$i] . "'";
 				mysql_query($sqlab);
-				echo "<font color='green'>Rang erfolgreich ge�ndert</font><br><br>";
+				echo "<font color='green'>Rang erfolgreich ge&auml;ndert</font><br><br>";
 			}
 			else {
-				echo "<font color='red'>Keine ID �bergeben.</font><br><br>";
+				echo "<font color='red'>Keine ID &uuml;bergeben.</font><br><br>";
 			}
 		}
 		echo "<p><a href='main.php?target=ally&ac=7'>Clear</a></p>";
@@ -809,7 +809,7 @@ else if($ac==9) {
 			#ablehnen
 			$id = trim(mysql_real_escape_string($_POST["bid"]));
 			if($id=='') {
-				echo "<font color='red'>Keine ID �bergeben.</font>";
+				echo "<font color='red'>Keine ID &uuml;bergeben.</font>";
 			}
 			else {
 				$sqlab = "select * from bewerbungen where id='" . $id . "'";
@@ -846,7 +846,7 @@ else if($ac==9) {
 			#aufnhemen
 			$id = trim(mysql_real_escape_string($_POST["bid"]));
 			if($id=='') {
-				echo "<font color='red'>Keine ID �bergeben.</font><br>";
+				echo "<font color='red'>Keine ID &uuml;bergeben.</font><br>";
 			}
 			else {
 				$sqlab = "select * from bewerbungen where id='" . $id . "'";
@@ -857,7 +857,7 @@ else if($ac==9) {
 				else {
 					$dsatz = mysql_fetch_assoc($res);
 					if($dsatz["allyid"]!=$userhomeali) {
-						echo "<font color='red'>Achtung wir haben sie beim betr�gen erwischt.</font><br>";
+						echo "<font color='red'>Achtung wir haben sie beim betr&uuml;gen erwischt.</font><br>";
 					}
 					else {
 						$sqlab = "delete from bewerbungen where id='" . $id . "' LIMIT 1";
@@ -865,7 +865,7 @@ else if($ac==9) {
 						
 						$date  = date("m.d.Y H:i:s");
 						
-						$text   = "Ihre Bewerbung wurde abgelehnt bitte reden sie mit dem Absender dieser mail �ber ihre Ablehnung.";
+						$text   = "Ihre Bewerbung wurde abgelehnt bitte reden sie mit dem Absender dieser mail &uuml;ber ihre Ablehnung.";
 						
 						$sqlab  = "INSERT INTO `mail` ( `id` , `absender` , `empfaenger` , `datum` , `status` , `owner` , `titel` , `text` ) VALUES (";
 						$sqlab .= "NULL , '" . $_SESSION["user"] . "', '" . $dsatz["user"] . "', '" . $date . "', 'neu', 'ausgang', 'Bewerbung Ally', '" . $text . "')";
@@ -880,7 +880,7 @@ else if($ac==9) {
 			#einladung zur�ckziehen
 			$id = trim(mysql_real_escape_string($_POST["bid"]));
 			if($id=='') {
-				echo "<font color='red'>Keine ID �bergeben.</font>";
+				echo "<font color='red'>Keine ID &uuml;bergeben.</font>";
 			}
 			else {
 				$sqlab = "select * from bewerbungen where id='" . $id . "'";
@@ -891,7 +891,7 @@ else if($ac==9) {
 				else {
 					$dsatz = mysql_fetch_assoc($res);
 					if($dsatz["allyid"]!=$userhomeali) {
-						echo "<font color='red'>Achtung wir haben sie beim betr�gen erwischt.</font><br>";
+						echo "<font color='red'>Achtung wir haben sie beim betr&uuml;gen erwischt.</font><br>";
 					}
 					else {
 						$sqlab = "delete from bewerbungen where id='" . $id . "' LIMIT 1";
@@ -899,13 +899,13 @@ else if($ac==9) {
 						
 						$date  = date("m.d.Y H:i:s");
 						
-						$text   = "Die Einladung wurde zur�ckgezogen.";
+						$text   = "Die Einladung wurde zur&uuml;ckgezogen.";
 						
 						$sqlab  = "INSERT INTO `mail` ( `id` , `absender` , `empfaenger` , `datum` , `status` , `owner` , `titel` , `text` ) VALUES (";
 						$sqlab .= "NULL , '" . $_SESSION["user"] . "', '" . $dsatz["user"] . "', '" . $date . "', 'neu', 'ausgang', 'Einladung in Ally', '" . $text . "')";
 						mysql_query($sqlab);
 						
-						echo "<font color='green'>Einladung erfolgreich zur�ckgezogen.</font><br>";
+						echo "<font color='green'>Einladung erfolgreich zur&&uuml;ckgezogen.</font><br>";
 					}
 				}
 			}
@@ -916,7 +916,7 @@ else if($ac==9) {
 		$user = trim(mysql_real_escape_string($_POST["empf"]));
 		$btext= trim(mysql_real_escape_string($_POST["etext"]));
 		if($user==''||$btext=='') {
-			echo "<font color='red'>Sie m�ssen einen Empf�nger und einen Text angeben.</font><br>";
+			echo "<font color='red'>Sie m&uuml;ssen einen Empf&auml;nger und einen Text angeben.</font><br>";
 		}
 		else {
 			$sqlab = "select * from users where name='" . $user . "'";
@@ -1013,9 +1013,9 @@ else if($ac==9) {
 }
 else if($ac==10) {
 	#allianz aufl�sen
-	echo "<h3>Allianz aufl�sen</h3>";
+	echo "<h3>Allianz aufl&ouml;sen</h3>";
 	if(!(isset($_GET["l"]))) {
-		echo "<p>Wollen sie die Allianz wirklich aufl�sen?</p>";
+		echo "<p>Wollen sie die Allianz wirklich aufl&ouml;sen?</p>";
 		echo "<div id='navcontainer'>";
 		echo "<ul id='navlist'>";
 		echo "<li><a href='main.php?target=ally&ac=10&l=1'>Ja</a></li>";
@@ -1040,10 +1040,10 @@ else if($ac==10) {
 		while($dsatz=mysql_fetch_assoc($res)) {
 			$date  = date("m.d.Y H:i:s");
 						
-			$text   = "Ihre Ally wurde aufgel�st.";
+			$text   = "Ihre Ally wurde aufgel&ouml;st.";
 						
 			$sqlab  = "INSERT INTO `mail` ( `id` , `absender` , `empfaenger` , `datum` , `status` , `owner` , `titel` , `text` ) VALUES (";
-			$sqlab .= "NULL , '" . $_SESSION["user"] . "', '" . $dsatz["user"] . "', '" . $date . "', 'neu', 'ausgang', 'Ally aufl�sung', '" . $text . "')";
+			$sqlab .= "NULL , '" . $_SESSION["user"] . "', '" . $dsatz["user"] . "', '" . $date . "', 'neu', 'ausgang', 'Ally aufl&ouml;sung', '" . $text . "')";
 			mysql_query($sqlab);
 		}
 		
@@ -1051,14 +1051,14 @@ else if($ac==10) {
 		$sqlab = "update users set alianzid='0', rangid='0' where alianzid='" . $userhomeali . "'";
 		mysql_query($sqlab);
 		
-		echo "<font color='green'>Die Allianz wurde erfolgreich aufgel�st.</font>";
+		echo "<font color='green'>Die Allianz wurde erfolgreich aufgel&ouml;st.</font>";
 	}
 }
 else if($ac==11) {
 	#aus der allianz austreten
 	echo "<h3>Aus Allianz austreten</h3>";
 	if(!(isset($_GET["a"]))) {
-		echo "<p>Wollen sie aus der Allianz wirklich austerten?</p>";
+		echo "<p>Wollen sie aus der Allianz wirklich austreten?</p>";
 		echo "<div id='navcontainer'>";
 		echo "<ul id='navlist'>";
 		echo "<li><a href='main.php?target=ally&ac=11&a=1'>Ja</a></li>";
@@ -1076,8 +1076,8 @@ else if($ac==11) {
 else if($ac==12) {
 	#Gr�nder recht �bertragen
 	if(!(isset($_POST["ng"]))&&!isset($_POST["ab"])) {
-		echo "<h3>Gr�nder recht �bertragen</h3>";
-		echo "<p>Wem wollen sie das Gr�nder recht �bergeben?</p>";
+		echo "<h3>Gr&uuml;nder recht &uuml;bertragen</h3>";
+		echo "<p>Wem wollen sie das Gr&uuml;nder recht &uuml;bergeben?</p>";
 		echo "<form action='main.php' method='post'>";
 		
 		echo "<p>Neuer Gr&uuml;nder:</p>";
@@ -1090,7 +1090,7 @@ else if($ac==12) {
 		}
 		echo "</select></p>";
 		
-		echo "<p>Ihr Zuk�nftiges Recht:</p>";
+		echo "<p>Ihr Zuk&uuml;nftiges Recht:</p>";
 		echo "<p><select name='nre' size='1'>";
 		$sqlab = "select * from allyraenge where allyid='" . $userhomeali . "'";
 		$res   = mysql_query($sqlab);
@@ -1112,12 +1112,12 @@ else if($ac==12) {
 		$ac=0;
 	}
 	else {
-		echo "<h3>Gr�nder recht �bertragen</h3>";
+		echo "<h3>Gr&uuml;nder recht &uuml;bertragen</h3>";
 		
 		$ngr = mysql_real_escape_string($_POST["ngr"]);
 		$nre = mysql_real_escape_string($_POST["nre"]);
 		if($ngr==''||$nre=='') {
-			echo "<font color='red'>Kein Neuer Benutzer oder kein Neues Recht ausgew�hlt.</font><br>";
+			echo "<font color='red'>Kein Neuer Benutzer oder kein Neues Recht ausgew&auml;hlt.</font><br>";
 		}
 		else {
 			$sqlab = "select * from users where name='" . $ngr . "'";
@@ -1132,7 +1132,7 @@ else if($ac==12) {
 				$sqlab = "update users set rangid='" . $nre . "' where name='" . $_SESSION["user"] . "'";
 				mysql_query($sqlab);
 				
-				echo "<font color='green'>Sie haben erfolgreich den Gr�nder title abgetreten.</font><br>";
+				echo "<font color='green'>Sie haben erfolgreich den Gr&uuml;nder title abgetreten.</font><br>";
 			}
 		}
 		
@@ -1165,7 +1165,7 @@ else if($ac==13) {
 }
 else if($ac==14) {
 	#bewerbung zurckziehen
-	echo "<h3>Bewerbung zur�ckzeihen</h3>";
+	echo "<h3>Bewerbung zur&uuml;ckziehen</h3>";
 	if(!(isset($_GET["z"]))) {
 		echo "<p>Wollen sie wirklich ihre bewerbung zur&uuml;ckziehen?</p>";
 		echo "<div id='navcontainer'>";
@@ -1179,7 +1179,7 @@ else if($ac==14) {
 		$sqlab = "delete from bewerbungen where user='" . $_SESSION["user"] . "' LIMIT 1";
 		mysql_query($sqlab);
 		
-		echo "<font color='green'>Sie haben irhe bewerbung eroglreich zur&uuml;ckgezogen</font>";
+		echo "<font color='green'>Sie haben ihre bewerbung eroglreich zur&uuml;ckgezogen</font>";
 	}
 }
 else if($ac==15) {
@@ -1398,7 +1398,7 @@ else if($userhomeali!=0&&$ac==0) {
 		echo "<tr><td class='hsmallborder' align='center' colspan='2'><a style='text-decoration: none;' href='main.php?target=ally&ac=11'>Austreten</a></td></tr>";
 	}
 	else {
-		echo "<tr><td class='hsmallborder' align='center' colspan='2'><a style='text-decoration: none;' href='main.php?target=ally&ac=12'>Gr�nder recht �bergeben</a></td></tr>";
+		echo "<tr><td class='hsmallborder' align='center' colspan='2'><a style='text-decoration: none;' href='main.php?target=ally&ac=12'>Gr&uuml;nder recht &uuml;bergeben</a></td></tr>";
 	}
 	echo "</table>";
 }
