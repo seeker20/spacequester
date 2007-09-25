@@ -7,7 +7,7 @@ $all_ready = mysql_num_rows($result);
 
 if ($all_ready >= $user_max_regist)
 {
-	echo "Sorry, Sie koennen sich nicht Registrieren, denn das System laesst kein weitere Usern mehr an.\n";
+	echo "Sorry, Sie k&ouml;nnen sich nicht Registrieren, denn das System l&auml;sst kein weitere Usern mehr an.\n";
 }
 else {
 

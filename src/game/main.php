@@ -20,7 +20,7 @@ if(isset($_GET["newstyle"])) {
 
 <?php
 if(isset($_GET["target"])) {
-	$tmpTarget = $_GET["target"];
+	$tmpTarget = htmlentities($_GET["target"]);
 }
 else if(isset($_POST["target"])) {
 	$tmpTarget = $_POST["target"];

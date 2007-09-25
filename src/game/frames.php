@@ -39,7 +39,7 @@ if(!(file_exists($target)))
 		//$errorl = new LangObject($_SESSION["Language"], "in_error");
 		echo "<h2>Fehler: Seite nicht gefunden</h2>";
 		echo "<p>Er konnte die angegebene seite nciht finden</p>";
-		echo "<p>Die seite " . $target . " wurde nciht gefunden</p>";
+		echo "<p>Die seite " . htmlentities($target) . " wurde nciht gefunden</p>";
 		echo "<p>Veruschen sie es sp&#228;ternochmal ansonsten kontaktiren</p>";
 		echo "<p>sie bitte den webmaster</p>";
 	}

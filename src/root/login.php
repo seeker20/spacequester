@@ -27,7 +27,7 @@ if(isset($_GET["ac"])||isset($_POST["ac"])) {
 			else {
 				$dsatz = mysql_fetch_assoc($res);
 				if($dsatz["link"]!='') {
-					echo "Sie mssen sich erst Freischalten.<br>";
+					echo "Sie m&uuml;ssen sich erst Freischalten.<br>";
 				}
 				else {
 					$date = date("d.m.Y");
