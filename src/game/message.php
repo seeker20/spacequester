@@ -19,10 +19,10 @@ else
 if($action == "wichtig")
 {
 // 	$titel  = $_GET['titel'];
-	$id     = $_GET['id'];
-	$target = $_GET['ziel'];
+	$id     = mysql_real_escape_string($_GET['id']);
+	$target = mysql_real_escape_string($_GET['ziel']);
 
-	$sql = ("SELECT * FROM wichtige_nachrichten WHERE id='".mysql_real_escape_string($id)."' AND target= '".mysql_real_escape_string($target)."'");
+	$sql = ("SELECT titel,target,id,von,text,datum FROM wichtige_nachrichten WHERE id='$id' AND target= '$target'");
 	$result = mysql_query($sql) or die(mysql_error());
 	$row = mysql_fetch_array($result);
 	$titel  = $row['titel'];
@@ -39,7 +39,7 @@ if($action == "wichtig")
 
 if($action == "eingang")
 {
-	$sql = ("SELECT * FROM mail WHERE empfaenger= '$whoami' AND status != 'papierkorb' AND status != 'geloescht'");
+	$sql = ("SELECT id,status,titel,text,datum,absender FROM mail WHERE empfaenger= '$whoami' AND status != 'papierkorb' AND status != 'geloescht'");
 	$result = mysql_query($sql) or die(mysql_error());
 	$anz = mysql_num_rows($result);
 	echo "<h3>Posteingang</h3>";
@@ -72,7 +72,7 @@ if($action == "eingang")
 
 if($action == "papkorb")
 {
-	$sql = ("SELECT * FROM mail WHERE empfaenger= '$whoami' AND status= 'papierkorb' AND status != 'geloescht'");
+	$sql = ("SELECT id,titel,absender,datum FROM mail WHERE empfaenger= '$whoami' AND status= 'papierkorb' AND status != 'geloescht'");
 	$result = mysql_query($sql) or die(mysql_error());
 	echo "<h3>Paperkorb</h3>";
 	echo "<table border='0' class='smallborder' cellspacing='0' cellpadding='0'>\n";
@@ -104,9 +104,9 @@ if($action == "papkorb")
 
 if($action == "read")
 {
-	$id    = $_GET['id'];
+	$id    = mysql_real_escape_string($_GET['id']);
 	
-	$sql = ("SELECT * FROM mail WHERE id='".mysql_real_escape_string($id)."' AND empfaenger ='$whoami' AND status != 'geloescht'");
+	$sql = ("SELECT id,titel,text,status,datum,absender FROM mail WHERE id='$id' AND empfaenger ='$whoami' AND status != 'geloescht'");
 	$result = mysql_query($sql) or die(mysql_error());
 	$row = mysql_fetch_array($result);
 	$anz = mysql_num_rows($result);
@@ -118,7 +118,7 @@ if($action == "read")
 	$datum    = $row['datum'];
 	$absender = $row['absender'];
 
-	$sql = ("UPDATE mail SET status= 'gelesen' WHERE id= '".mysql_real_escape_string($id)."' AND empfaenger= '$whoami'");
+	$sql = ("UPDATE mail SET status= 'gelesen' WHERE id= '$id' AND empfaenger= '$whoami'");
 	mysql_query($sql) or die(mysql_error());
 
 	echo "Email von <b>$absender</b> wurde gesendet um $datum<br>\n";
@@ -144,16 +144,16 @@ if($action == "read")
 
 if($action == "mail_aktionen")
 {
-	$id    = $_GET['id'];
+	$id    = mysql_real_escape_string($_GET['id']);
 // 	$titel = $_GET['titel'];
-	$do    = $_GET['do'];
+	$do    = mysql_real_escape_string($_GET['do']);
 
 	
 
 	if($do == "1")
 	{
 		/// Mail als gelesen Makieren
-		$sql = ("UPDATE mail SET status= 'gelesen' WHERE id= '".mysql_real_escape_string($id)."' AND empfaenger= '$whoami'");
+		$sql = ("UPDATE mail SET status= 'gelesen' WHERE id= '$id"' AND empfaenger= '$whoami'");
 		mysql_query($sql) or die(mysql_error());
 		echo "<br>Mail erfolgreich als <b>Gelesen</b> Makiert\n";
 		
@@ -161,7 +161,7 @@ if($action == "mail_aktionen")
 	elseif($do == "2")
 	{
 		/// Mail Ins Papierkorb tun
-		$sql = ("UPDATE mail SET status= 'papierkorb' WHERE id= '".mysql_real_escape_string($id)."' AND empfaenger= '$whoami'");
+		$sql = ("UPDATE mail SET status= 'papierkorb' WHERE id= '$id' AND empfaenger= '$whoami'");
 		mysql_query($sql) or die(mysql_error());
 		echo "<br>Mail erfolgreich ins <b>Papierkorb</b> geschmissen\n";
 		
@@ -169,7 +169,7 @@ if($action == "mail_aktionen")
 	elseif($do == "3")
 	{
 		/// Mail löschen
-		$sql = ("UPDATE mail SET status= 'geloescht' WHERE id= '".mysql_real_escape_string($id)."' AND empfaenger= '$whoami'");
+		$sql = ("UPDATE mail SET status= 'geloescht' WHERE id= '$id' AND empfaenger= '$whoami'");
 		mysql_query($sql) or die(mysql_error());
 		echo "<br>Mail wurde erfolgreich <b>vernichtet</b>\n";
 		
@@ -177,7 +177,7 @@ if($action == "mail_aktionen")
 	elseif($do == "4")
 	{
 		/// Mail als Neu makieren
-		$sql = ("UPDATE mail SET status= 'neu' WHERE id= '".mysql_real_escape_string($id)."' AND empfaenger= '$whoami'");
+		$sql = ("UPDATE mail SET status= 'neu' WHERE id= '$id' AND empfaenger= '$whoami'");
 		mysql_query($sql) or die(mysql_error());
 		echo "<br>Mail wurde erfolgreich als <b>Neu</b> makiert<br>\n";
 		
@@ -190,7 +190,7 @@ if($action == "mail_aktionen")
 
 if($action == "ausgang")
 {
-	$sql = ("SELECT * FROM mail WHERE absender= '$whoami' AND owner != 'geloescht'");
+	$sql = ("SELECT id,titel,datum,empfaenger FROM mail WHERE absender= '$whoami' AND owner != 'geloescht'");
 	$result = mysql_query($sql) or die(mysql_error());
 	echo "<h3>Postausgang</h3>";
 	echo "<table border='0' class='smallborder' cellspacing='0' cellpadding='0'>\n";
@@ -222,20 +222,20 @@ if($action == "ausgang")
 
 if($action == "owner_kommands")
 {
-	$do    = $_GET['do'];
+	$do    = mysql_real_escape_string($_GET['do']);
 // 	$titel = $_GET['titel'];
-	$id    = $_GET['id'];
+	$id    = mysql_real_escape_string($_GET['id']);
 
 	if($do == "1")
 	{
-		$sql = ("UPDATE mail SET owner= 'geloescht' WHERE id= '".mysql_real_escape_string($id)."' AND absender= '$whoami'");
+		$sql = ("UPDATE mail SET owner= 'geloescht' WHERE id= '$id' AND absender= '$whoami'");
 		mysql_query($sql) or die(mysql_error());
 		echo "Email wurde erfolgreich vernichtet<br>\n";
 		
 	}
 	elseif($do == "2")
 	{
-		$sql = ("SELECT * FROM mail WHERE owner != 'geloescht' AND id= '".mysql_real_escape_string($id)."' AND absender= '$whoami'");
+		$sql = ("SELECT text,empfaenger FROM mail WHERE owner != 'geloescht' AND id= '$id' AND absender= '$whoami'");
 		$result = mysql_query($sql) or die(mysql_error());
 		$row = mysql_fetch_array($result);
 
@@ -248,19 +248,19 @@ if($action == "owner_kommands")
 				<tr>
 					<td>Empf&#228;nger</td>
 					<td>:</td>
-					<td><input type=text name=empfaenger  style="border: 0px;" value=<?php echo $empfaenger; ?>></td>
+					<td><input type=text name=empfaenger  style="border: 0px;" value=<?=$empfaenger; ?>></td>
 				</tr>
 
 				<tr>
 					<td>Betref</td>
 					<td>:</td>
-					<td><input type=text name=betref style="border: 0px;"  value=<?php echo $titel; ?>></td>
+					<td><input type=text name=betref style="border: 0px;"  value=<?=$titel; ?>></td>
 				</tr>
 
 				<tr>
 					<td>Text</td>
 					<td>:</td>
-					<td><textarea name=inhalt cols=25 rows=18 style="border: 0px;"><?php echo $text; ?></textarea></td>
+					<td><textarea name=inhalt cols=25 rows=18 style="border: 0px;"><?=$text; ?></textarea></td>
 				</tr>
 			</table>
 			<input type=submit value=Schicken>
@@ -306,6 +306,11 @@ if($action == "write_mail")
 	$betref     = htmlentities($_POST['betref']);
 	$text       = htmlentities($_POST['inhalt']);
 	$datum      = date("d.m.Y");
+
+	$empfaenger = mysql_real_escape_string($empfaenger);
+	$betref     = mysql_real_escape_string($betref);
+	$text       = mysql_real_escape_string($text);
+
 
 	if(!$whoami)
 	{

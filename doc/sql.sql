@@ -291,14 +291,14 @@ CREATE TABLE `users` (
   `rangid` int(3) NOT NULL,
   `lastaction` varchar(255) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- 
 -- Daten für Tabelle `users`
 -- 
 
-INSERT INTO `users` VALUES (1, 'Damian', '9935f3f5e3914a65a4262feb215bc0fe', 'damian@elsw.de', '18.10.2006', '127.0.0.1', '17.10.2006', '', 5000, 1, 2, 1, 1, '');
-INSERT INTO `users` VALUES (2, 'fkrauthan', 'deba5ebc6d72f0bafb498aa7a73300ea', 'fkrauthan@gmx.net', '21.11.2006', '217.189.193.43', '17.10.2006', '', 5000, 2, 0, 3, 4, '1164129650');
+INSERT INTO `users` VALUES (1, 'Damian', '9935f3f5e3914a65a4262feb215bc0fe', 'damian@tss-clan.eu', '18.10.2006', '127.0.0.1', '17.10.2006', '', 5000, 1, 2, 1, 1, '');
+INSERT INTO `users` VALUES (2 'Niklas', '28dc6b0e1b33769b4b94685e4f4d1e5c', 'Jango-Niklas@web.de', '29.09.2007,' '127.0.0.1','', 5000,3,1,0,0,'1191064813');
 
 -- --------------------------------------------------------
 
@@ -323,4 +323,4 @@ CREATE TABLE `wichtige_nachrichten` (
 INSERT INTO `wichtige_nachrichten` VALUES (1, 'Administration', '18.10.2006', 'Test', 'Hiermit teste ich das "wichtige" mail system', 'all');
 INSERT INTO `wichtige_nachrichten` VALUES (2, 'fkrauthan', '21.11.2006 17:40', 'Einladungen', 'Einladungen können nun abgewissen werden annehmen kommt später.', 'all');
 
-ALTER TABLE `users` ADD `status` ENUM( 'Admin', 'Benutzer' ) NOT NULL ;
+ALTER TABLE `users` ADD `status` ENUM( 'Benutzer', 'Admin' ) NOT NULL ;
