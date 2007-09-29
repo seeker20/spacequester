@@ -1,7 +1,5 @@
 <?php
 
-fehler("sql.connect.php","0xdb001");
-
 $con_id = @mysql_connect(SQL_HOST,SQL_USER,SQL_PASS,SQL_DATA);
 
 if(!$con_id)
