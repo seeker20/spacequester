@@ -1,9 +1,6 @@
-<table border='0' width='97%' style="height: 97%">
-	<tr>
-		<td width='50%'>
-			<div id='abgerundedeecken3' align='center'>
-				<?php
-				$whoami = $_SESSION["user"];
+
+<?php
+$whoami = $_SESSION["user"];
 if(isset($_GET['action']))
 {
 	$action = $_GET['action'];
@@ -324,7 +321,7 @@ if($action == "write_mail")
 		$err = true;
 	}
 	
-	$sqlab = "select * from mail where absender='" . $whoami . "' and empfaenger='" . $empfaenger . "' and titel='" . $betref . "' and text='" . $text . "'";
+	$sqlab = "select id from mail where absender='" . $whoami . "' and empfaenger='" . $empfaenger . "' and titel='" . $betref . "' and text='" . $text . "'";
 	$res   = mysql_query($sqlab);
 	if(mysql_num_rows($res) > 0) {
 		echo "Reload Sperre<br><br>\n";
@@ -333,7 +330,7 @@ if($action == "write_mail")
 
 	if(!$err)
 	{
-		$sqlab = "select * from users where name='" . $empfaenger . "'";
+		$sqlab = "select id from users where name='" . $empfaenger . "'";
 		$res    = mysql_query($sqlab);
 		if(mysql_num_rows($res)<= 0) {
 			echo "User existiert nicht<br><br>\n";
@@ -357,7 +354,7 @@ if($action == "write_mail")
 
 			<div id='abgerundedeecken4' align='center'>
 			<?php
-				$sql = ("SELECT * FROM wichtige_nachrichten WHERE target='alianz' OR target='all'");
+				$sql = ("SELECT titel,target,id,von,text,datum FROM wichtige_nachrichten WHERE target='alianz' OR target='all'");
 				$result = mysql_query($sql) or die(mysql_error());
 				$anzahl = mysql_num_rows($result);
 				echo "Im wichtige Nachrichten System befinden sich $anzahl nachrichten<br>\n";
