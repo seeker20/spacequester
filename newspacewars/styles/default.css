@@ -1,0 +1,31 @@
+body
+{
+	background:#000000;
+	margin:0px;
+	padding:0px;
+}
+
+
+
+#banner
+{
+	height:80px;
+	background:#999999;
+}
+
+#menu
+{
+	width:20%;
+	background:#CCCCCC;
+	float:left;
+}
+
+#text
+{
+	width:80%;
+	background:#CCCCCC;
+	float:left
+}
+
+.schrift
+{color:#45acf6;}
