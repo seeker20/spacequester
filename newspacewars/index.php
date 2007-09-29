@@ -17,7 +17,17 @@
 
 	<div id="menu">
 		<div id="kleinesmenu">
-		test
+		<center>
+		<a href="?menu=" class="menuref">Starseite</a><br>
+		<a href="?menu=" class="menuref">Starseite</a><br>
+		<a href="?menu=" class="menuref">Starseite</a><br>
+		<a href="?menu=" class="menuref">Starseite</a><br>
+		<a href="?menu=" class="menuref">Starseite</a><br>
+		<a href="?menu=" class="menuref">Starseite</a><br>
+		<a href="?menu=" class="menuref">Starseite</a><br>
+		<a href="?menu=" class="menuref">Starseite</a><br>
+		<a href="?menu=" class="menuref">Starseite</a>
+		</center>
 		</div>
 	</div>
 		

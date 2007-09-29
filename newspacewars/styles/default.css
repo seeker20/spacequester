@@ -47,3 +47,28 @@ body
 
 .schrift
 {color:#45acf6;}
+
+
+.menuref:link 
+{
+color:gold; 
+text-decoration:none;
+}
+
+.menuref:visited 
+{
+color:gold; 
+text-decoration:none;
+}
+
+.menuref:active 
+{
+color:gold; 
+text-decoration:none;
+}
+
+.menuref:hover 
+{
+color:#45acf6; 
+text-decoration:underline overline;
+}
