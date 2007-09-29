@@ -8,20 +8,25 @@
 <link rel="stylesheet" type="text/css" href="styles/default.css" />
 </head>
 
-<body>
+<body text="gold">
 <div id="root">
 	
 	<div id="banner">
-	banner
+		test
 	</div>
 
 	<div id="menu">
-	menu
+		<div id="kleinesmenu">
+		test
+		</div>
 	</div>
 		
 	<div id="text">
-	text
+		<div id="kleinertext">
+		test
+		</div>
 	</div>
+	
 <br style="clear:both" />
 </div>
 

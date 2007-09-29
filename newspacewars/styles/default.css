@@ -10,21 +10,39 @@ body
 #banner
 {
 	height:80px;
-	background:#999999;
+	background:#3300FF;
 }
 
 #menu
 {
 	width:20%;
-	background:#CCCCCC;
+	background:#3300FF;
 	float:left;
 }
 
 #text
 {
 	width:80%;
-	background:#CCCCCC;
+	background:#3300FF;
 	float:left
+}
+
+#kleinesmenu
+{
+	margin:15px;
+	background:#000000;
+}
+
+#kleinertext
+{
+	margin:15px;
+	background:#000000;
+}
+
+#kleinesbanner
+{
+	margin:15px;
+	background:#000000;
 }
 
 .schrift
