@@ -31,7 +31,7 @@ else {
 }
 
 $aliid 	= mysql_real_escape_string($aliid);
-$ac		= mysql_real_escape_string($ac);
+$ac	= mysql_real_escape_string($ac);
 
 if($ac==0) {
 	if($aliid==0) {
@@ -767,7 +767,7 @@ else if($ac==9) {
 				echo "<br>";
 				echo "<div id='abgerundedeecken6'>Datum: " . $dsatz["datum"] . "</div>";
 				echo "<br>";
-				echo "<div id='abgerundedeecken6'>" . str_replace("\n","<br>",$dsatz["text"]) . "</div>";
+				echo "<div id='abgerundedeecken6'>" . htmlentities(str_replace("\n","<br>",$dsatz["text"])) . "</div>";
 				echo "<br>";
 				echo "<form action='main.php' method='post'>";
 				echo "<div id='abgerundedeecken6'><input type='submit' name='ak' value='Aufnehmen'>&nbsp;&nbsp;&nbsp;<input type='submit' name='ab' value='Ablehnen'></div>";

@@ -38,7 +38,7 @@
 	}
 	else {
 		$shiplist  = "<select name='ship'>";
-		$shiplist .= "<option>" . $dsatz2["schiffsid"] . "</option>";
+		$shiplist .= "<option>" . htmlentities($dsatz2["schiffsid"]) . "</option>";
 		$shiplist .= "</select>";
 	}
 	

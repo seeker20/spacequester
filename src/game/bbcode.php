@@ -64,8 +64,8 @@ else {
 	</tr>
 	<tr>
 		<td class='hsmallborder'>[size=Option]Text[/size]</td>
-		<td class='hsmallborder'>[size=+2]dieser Text ist zwei Größen größer als normal[/size]</td>
-		<td class='hsmallborder'><?php echo bbcode("[size=+2]dieser Text ist zwei Größen größer als normal[/size]"); ?> </td>
+		<td class='hsmallborder'>[size=+2]dieser Text ist zwei Gr&ouml;ssen gr&ouml;sser als normal[/size]</td>
+		<td class='hsmallborder'><?php echo bbcode("[size=+2]dieser Text ist zwei Gr&ouml;ssen gr&ouml;sser als normal[/size]"); ?> </td>
 	</tr>
 	<tr>
 		<td class='hsmallborder'>[font=Option]Text[/font]</td>
@@ -74,13 +74,13 @@ else {
 	</tr>
 	<tr>
 		<td class='hsmallborder'>[left]Text[/left]<br>[center]Text[/center]<br>[right]Text[/right]</td>
-		<td class='hsmallborder'>[left]linksbündig[/left]<br>[center]zentriert[/center]<br>[right]rechtsbündig[/right]</td>
-		<td class='hsmallborder'><?php echo bbcode("[left]linksbündig[/left]") . "<br>" . bbcode("[center]zentriert[/center]") . "<br>" . bbcode("[right]rechtsbündig[/right]"); ?> </td>
+		<td class='hsmallborder'>[left]linksb&uuml;ndig[/left]<br>[center]zentriert[/center]<br>[right]rechtsb&uuml;ndig[/right]</td>
+		<td class='hsmallborder'><?php echo bbcode("[left]linksb&uuml;ndig[/left]") . "<br>" . bbcode("[center]zentriert[/center]") . "<br>" . bbcode("[right]rechtsb&uuml;ndig[/right]"); ?> </td>
 	</tr>
 	<tr>
 		<td class='hsmallborder'>[indent]Text[/indent]</td>
-		<td class='hsmallborder'>[indent]dieser Text ist eingerückt[/indent]</td>
-		<td class='hsmallborder'><?php echo bbcode("[indent]dieser Text ist eingerückt[/indent]"); ?> </td>
+		<td class='hsmallborder'>[indent]dieser Text ist einger&uuml;ckt[/indent]</td>
+		<td class='hsmallborder'><?php echo bbcode("[indent]dieser Text ist einger&uuml;ckt[/indent]"); ?> </td>
 	</tr>
 	<tr>
 		<td class='hsmallborder'>[email]Text[/email]<br>[email=Option]Text[/email]</td>

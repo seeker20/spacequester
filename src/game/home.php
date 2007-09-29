@@ -94,7 +94,7 @@
 				echo "<br>";
 				echo "<table border='0' width='95%'>";
 				echo "<tr><td>Typ</td><td>:</td><td>" . $typ . "</td></tr>";
-				echo "<tr><td>Gr&ouml;ße</td><td>:</td><td>" . $umfang . "</td></tr>";
+				echo "<tr><td>Gr&ouml;sse</td><td>:</td><td>" . $umfang . "</td></tr>";
 				echo "<tr><td>Einwohner</td><td>:</td><td>" . $einwohner . "</td></tr>";
 				echo "<tr><td>Position</td><td>:</td><td><a href='main.php?target=viewstar&pos=" . str_replace(":","-",$position) . "'>" . $position . "</a></td></tr>";
 				echo "</table>";
@@ -115,7 +115,7 @@
 						$res2  = mysql_query($sqlab);
 						$dsatz2=mysql_fetch_assoc($res2);
 					
-						echo $dsatz["schiffsid"] . "&nbsp;(";
+						echo htmlentities($dsatz["schiffsid"]) . "&nbsp;(";
 						if($dsatz2["lastaction"]=='') {
 							echo "<font color='red'>";
 						}
@@ -127,11 +127,11 @@
 								echo "<font color='yellow'>";
 							}
 						}
-						echo $dsatz2["name"] . "</font>)";
+						echo htmlentities($dsatz2["name"]) . "</font>)";
 						echo "<br>";
 					}
 				}
-				#alle spieler die unterwegs sind hier nachprüfen ob die gerade auf deisem sektor sind
+				#alle spieler die unterwegs sind hier nachprï¿½fen ob die gerade auf deisem sektor sind
 				$sqlab = "select * from schiffs_auftraege";
 				$res3   = mysql_query($sqlab);
 				while($dsatz3=mysql_fetch_assoc($res3)) {
@@ -164,7 +164,7 @@
 						$res2  = mysql_query($sqlab);
 						$dsatz2=mysql_fetch_assoc($res2);
 					
-						echo "<font color='#99FFCC'>" . $dsatz["schiffsid"] . "</font>&nbsp;(";
+						echo "<font color='#99FFCC'>" . htmlentities($dsatz["schiffsid"]) . "</font>&nbsp;(";
 						if($dsatz2["lastaction"]=='') {
 							echo "<font color='red'>";
 						}

@@ -1,5 +1,5 @@
 <?php
-echo "<h3>Planet Überischt</h3>";
+echo "<h3>Planet &uuml;berischt</h3>";
 
 
 $sqlab 	= "select * from schiffs_auftraege where schiffsid='" . $_SESSION["ship"] . "'";
@@ -10,7 +10,7 @@ if(mysql_num_rows($res)>0) {
 	$pos = $dsatz["x"] . "-" . $dsatz["y"] . "-" . $dsatz["sector"];
 	
 	echo "<p>Aktuelle Position: <a href='main.php?target=viewstar&pos=" . $pos . "'>" . $pos . "</a></p>";
-	echo "<p>Sie können Keine Andere Aktion machen.</p>";
+	echo "<p>Sie k&ouml;nnen Keine Andere Aktion machen.</p>";
 }
 else {
 	$sqlab 	= "select * from schiffe where id='" . $_SESSION["ship"] . "'";

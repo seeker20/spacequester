@@ -1,3 +1,4 @@
+
 <br>
 <table border='0' width='97%' style="height: 97%">
 	<tr>
@@ -13,7 +14,7 @@
 					echo "<img src='../daten/ships/graphics/" . $ships[$dsatz["schifstypid"]][3] . "' alt='Schiffs Bild'>";
 					echo "<br><br>";
 					echo "<form action='main.php' method='post'>";
-					echo "<input type='text' size='15%' name='shipname' value='" . $dsatz["schiffsid"] . "'>";
+					echo "<input type='text' size='15%' name='shipname' value='" . htmlentities($dsatz["schiffsid"]) . "'>";
 					echo "&nbsp;&nbsp;<input type='submit' name='shipnameswitch' value='&Auml;ndern'>&nbsp;<input type='reset' value='Default'>";
 					echo "<input type='hidden' name='target' value='ship'>";
 					echo "</form>";
@@ -45,7 +46,7 @@
 								}
 							}
 							else if($_GET["view"]==2) {
-								echo "<tr><td colspan='3' align='center'><b>Ausrüstung</b></td></tr>";
+								echo "<tr><td colspan='3' align='center'><b>Ausr&uuml;stung</b></td></tr>";
 								$data = explode(",",$dsatz["ausruestung"]);
 								for($i=0;$i < count($data);$i++) {
 									if(trim($data[$i])!='') {
@@ -60,7 +61,7 @@
 							echo "<tr><td colspan='3' align='center'><b>Lage Men&uuml;</b></td></tr>";
 							echo "<tr><td colspan='3' align='center'>&nbsp;</td>";
 							echo "<tr><td colspan='3' align='center'><a href='main.php?target=ship&view=1'>Rohstoffe</a></td></tr>";
-							echo "<tr><td colspan='3' align='center'><a href='main.php?target=ship&view=2'>Ausrüstung</a></td></tr>";
+							echo "<tr><td colspan='3' align='center'><a href='main.php?target=ship&view=2'>Ausr&uuml;stung</a></td></tr>";
 						}
 					?>
 				</table>
