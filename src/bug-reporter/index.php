@@ -41,7 +41,7 @@ echo "';";
 
 <body>
 <h1>Wilkommen auf meiner Homepage</h1>
-<p>Auf dieser setie wierd geschaut was ihr Browser alles unterstzt.</p>
+<p>Auf dieser setie wierd geschaut was ihr Browser alles unterst&uuml;zt.</p>
 <p>Falls es nicht weitergehen sollte klicken sie bitte 
 <?php
 echo "<a href='main.php?newstart=1";

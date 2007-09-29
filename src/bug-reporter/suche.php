@@ -22,12 +22,15 @@ if($action == "main")
 if($action == "such")
 {
 	$err = false;
-	$target = $_POST['begriff'];
+	$target = htmlentities($_POST['begriff']);
+	$target = mysql_real_escape_string($target);
+
 	if(!$target)
 	{
 		echo "So kann ich nix finden ;-)\n";
 	}
-	$sql = ("SELECT * FROM bugs WHERE (beschreibung LIKE '%".mysql_real_escape_string($target)."%') OR (Owner LIKE '%".mysql_real_escape_string($target)."%')");
+	$sql = ("SELECT owner,url,beschreibung,status,kommentar,datum 
+		FROM bugs WHERE (beschreibung LIKE '%$target%') OR (Owner LIKE '%$target%')");
 	if(!$err)
 	{
 		$result = mysql_query($sql) or die(mysql_error());

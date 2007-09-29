@@ -19,7 +19,7 @@ $result = mysql_query($sql) or die(mysql_error());
 $row = mysql_fetch_array($result);
 $email = $row['email'];
 
-echo "Hallo $username, Sie sind im Zentrale wo Sie ihre Pers&#246;nliche daten k&#246;nnen<br><br>\n";
+echo "Hallo ".htmlentities($username).", Sie sind im Zentrale wo Sie ihre Pers&#246;nliche daten k&#246;nnen<br><br>\n";
 
 if($action == "main")
 {
@@ -120,6 +120,8 @@ if($action == "save_email")
 		}
 		else
 		{
+			$email1 = mysql_real_escape_string($email);
+			$email1 = htmlentities($email1);
 			$sql = ("UPDATE users SET email= '$email1' WHERE name='$username'");
 			mysql_query($sql) or die(mysql_error());
 		}
