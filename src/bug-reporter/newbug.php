@@ -50,6 +50,11 @@ if($action == "save_bug")
 	$besch = htmlentities($besch);
 	$url   = htmlentities($url);
 
+	// MySQL security ///
+	$owner = mysql_real_escape_string($owner);
+	$besch = mysql_real_escape_string($besch);
+	$url   = mysql_real_escape_string($url);
+
 	if(!$owner || !$besch)
 	{
 		echo "Fehler";
@@ -59,7 +64,7 @@ if($action == "save_bug")
 	if(!$err)
 	{
 		echo "<META http-equiv=\"refresh\" content=\"3;URL=main.php\">\n";
-		$sql = ("INSERT INTO bugs (owner,ip,url,beschreibung,datum) VALUES ('".mysql_real_escape_string($owner)."','".mysql_real_escape_string($ip)."','".mysql_real_escape_string($url)."','".mysql_real_escape_string($besch)."','".mysql_real_escape_string($datum)."')");
+		$sql = ("INSERT INTO bugs (owner,ip,url,beschreibung,datum) VALUES ('$owner','$ip','$url','$besch','$datum')");
 		mysql_query($sql) or die(mysql_error());
 		echo "<h1><b>Vielen Dank</b></h1>\n";
 	}
