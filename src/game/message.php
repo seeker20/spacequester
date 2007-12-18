@@ -153,7 +153,7 @@ if($action == "mail_aktionen")
 	if($do == "1")
 	{
 		/// Mail als gelesen Makieren
-		$sql = ("UPDATE mail SET status= 'gelesen' WHERE id= '$id"' AND empfaenger= '$whoami'");
+		$sql = ("UPDATE mail SET status= 'gelesen' WHERE id= '$id' AND empfaenger= '$whoami'");
 		mysql_query($sql) or die(mysql_error());
 		echo "<br>Mail erfolgreich als <b>Gelesen</b> Makiert\n";
 		
