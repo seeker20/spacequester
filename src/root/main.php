@@ -45,7 +45,7 @@ if(isset($_GET["newstart"])) {
 //Includes
 include "../global/mysql_connect.php";
 include "../global/funktionen.php";
-include "../global/querys.php";
+//include "../global/querys.php";
 include "../global/config.php";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"

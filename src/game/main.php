@@ -7,7 +7,7 @@ session_start();
 //Includes
 include "../global/mysql_connect.php";
 include "../global/funktionen.php";
-include "../global/querys.php";
+//include "../global/querys.php";
 include "../global/config.php";
 ?>
 
