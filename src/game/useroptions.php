@@ -25,10 +25,33 @@ if($action == "main")
 {
 	echo '<div id="navcontainer" style="width: 250px">';
 	echo '<ul id="navlist">';
+	echo "<li><a href=main.php?target=useroptions&action=style>Style &auml;ndern</a></li>\n";
 	echo "<li><a href=main.php?target=useroptions&action=email>Email adresse &auml;ndern</a></li>\n";
 	echo "<li><a href=main.php?target=useroptions&action=passwort>Passwort &auml;ndern</a></li>\n";
 	echo '</ul>';
 	echo '</div>';
+}
+
+if($action == "style")
+{
+	if(isset($_GET['exec']))
+	{
+		$style = mysql_real_escape_string($_POST['style']);
+		$sql = ("UPDATE users SET style='$style'");
+		mysql_query($sql) or die(mysql_error());
+		echo "Style erfolgreich ge&auml;ndert<br>";
+		echo "Um den Style sofort zu activieren, klicken Sie bitte <a href=main.php?newstyle=$style>Hier</a><br>";
+
+	}
+	echo "
+		<form action=main.php?target=useroptions&action=style&exec method=post>
+		<p>Hier kannst du dein Style &auml;ndern</p>
+		<select name=style>
+			<option>Default</option>
+			<option>Damian</option>
+		</select>
+		<input type=submit value=\"Style &auml;ndern\">	
+	";	
 }
 
 if($action == "email")

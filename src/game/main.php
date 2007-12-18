@@ -15,6 +15,8 @@ include "../global/config.php";
 #style switcher
 if(isset($_GET["newstyle"])) {
 	$_SESSION["UserStyle"] = $_GET["newstyle"];
+	$sql = ("UPDATE users SET style='".mysql_real_escape_string($_SESSION["UserStyle"])."'");
+	mysql_query($sql) or die(mysql_error());
 }
 ?>
 

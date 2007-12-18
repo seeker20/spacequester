@@ -63,6 +63,7 @@ if(isset($_GET["ac"])||isset($_POST["ac"])) {
 						$_SESSION["ship"]   = $dsatz["schifid"];
 						$_SESSION["gmod"]   = $modus;
 						$_SESSION["status"] = $dsatz["status"];
+						$_SESSION["UserStyle"]  = $dsatz["style"];
 						
 						if($_SESSION["JavaScript"]==true) {
 							echo '<script language="JavaScript">location.href="../game/main.php";';
