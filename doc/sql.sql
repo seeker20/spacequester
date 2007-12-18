@@ -298,8 +298,6 @@ CREATE TABLE `users` (
 -- 
 
 INSERT INTO `users` VALUES (1, 'Damian', '9935f3f5e3914a65a4262feb215bc0fe', 'damian@tss-clan.eu', '18.10.2006', '127.0.0.1', '17.10.2006', '', 5000, 1, 2, 1, 1, '');
-INSERT INTO `users` VALUES (2 'Niklas', '28dc6b0e1b33769b4b94685e4f4d1e5c', 'Jango-Niklas@web.de', '29.09.2007,' '127.0.0.1','', 5000,3,1,0,0,'1191064813');
-
 -- --------------------------------------------------------
 
 -- 
