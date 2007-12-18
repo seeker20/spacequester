@@ -3,11 +3,17 @@
 <?php
 if(isset($_GET["pos"])) {
 	$pos 		= explode("-",mysql_real_escape_string($_GET["pos"]));
-	$tmpPos = mysql_real_escape_string($_GET["pos"]);
+	$tmpPos = htmlentities(mysql_real_escape_string($_GET["pos"]));
 }
 else {
 	$pos 	= explode("-",mysql_real_escape_string($_POST["pos"]));
 	$tmpPos = mysql_real_escape_string($_POST["pos"]);
+}
+
+if($tmpPos == "--")
+{
+	echo "Sie Fliegen gerade";
+	exit();
 }
 
 include "../daten/galaxy/typs.inc.php";
