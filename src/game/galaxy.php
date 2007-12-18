@@ -31,6 +31,10 @@ if(isset($_POST["oldgala"])) {
 }
 else if(isset($_GET["gala"])) {
 	$galaxy = mysql_real_escape_string($_GET["gala"]);
+	if($galaxy == "")
+	{
+		die("Kein Galaxis");
+	}
 }
 else {
 	$sqlab = "select * from schiffe where id='" . $_SESSION["ship"] . "'";
@@ -51,8 +55,8 @@ echo "<hr>";
 echo "<br>";
 
 echo "<table border='1' cellspacing='0' cellpadding='0'>";
-
 $fp = fopen("../daten/galaxy/" . $galaxy . ".txt","r");
+
 include "../daten/galaxy/typs.inc.php";
 
 $y = 0;
