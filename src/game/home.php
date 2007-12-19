@@ -73,8 +73,10 @@
 			
 			$typ   			= $fieldtyp[$position[1]][0];
 			
-			if($fieldtyp[$position[1]][1]) {
+			//if($fieldtyp[$position[1]][1]) {
 				#daten aus db holen
+				echo "sector: $sector x: $x y: $y";
+				//exit();
 				$sqlab = "select * from station where sector='" . $sector . "' and x='" . $x . "' and y='" . $y . "'";
 				$res   = mysql_query($sqlab);
 				$dsatz = mysql_fetch_assoc($res);
@@ -82,11 +84,11 @@
 				$umfang		= $dsatz["groesse"];
 				$einwohner	= $dsatz["einwohner"];
 				
-			}
+			/*}
 			else {
 				$umfang		= "---";
 				$einwohner	= "---";
-			}
+			}*/
 			
 			$position = $y . ":" . $x . ":" . $sector;
 			
