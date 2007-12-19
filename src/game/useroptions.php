@@ -47,8 +47,8 @@ if($action == "style")
 		<form action=main.php?target=useroptions&action=style&exec method=post>
 		<p>Hier kannst du dein Style &auml;ndern</p>
 		<select name=style>
-			<option>Default</option>
-			<option>Damian</option>
+			<option>default</option>
+			<option>damian</option>
 		</select>
 		<input type=submit value=\"Style &auml;ndern\">	
 	";	
