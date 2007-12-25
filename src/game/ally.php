@@ -1051,6 +1051,9 @@ else if($ac==10) {
 		$sqlab = "update users set alianzid='0', rangid='0' where alianzid='" . $userhomeali . "'";
 		mysql_query($sqlab);
 		
+		$sql = "DELETE FROM alianzen WHERE id='$userhomeali'";
+		mysql_query($sql) or die(mysql_error());
+		
 		echo "<font color='green'>Die Allianz wurde erfolgreich aufgel&ouml;st.</font>";
 	}
 }
