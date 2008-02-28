@@ -46,7 +46,7 @@ if($ac==0) {
 			echo "<li><a href='main.php?target=ally&ac=15'>Allianz Suchen</a></li>";
 			echo "<li><a href='main.php?target=ally&ac=13'>Allianzen Auflisten</a></li>";
 			$sqlab = "select * from bewerbungen where user='" . $_SESSION["user"] . "'";
-			$res   = mysql_query($sqlab);
+			$res   = mysql_query($sqlab) or die(mysql_error());
 			if(mysql_num_rows($res)>0) {
 				echo "<br><li><a href='main.php?target=ally&ac=14'>Bewerbung zur&uuml;ckziehen</a></li>";
 			}
@@ -96,14 +96,14 @@ else if($ac==1) {
 		if(!$err) {
 			$sqlab  = "INSERT INTO `alianzen` ( `id` , `name` , `tag` , `internetext` , `externetext` , `bewerbungstext` , `datum` , `hp` , `logo` , `gruender` ) VALUES (";
 			$sqlab .= "NULL , '" . $allyname . "', '" . $allytag . "', '', '', '', '" . $date . "', '', '', '" . $_SESSION["user"] . "')";
-			mysql_query($sqlab);
+			mysql_query($sqlab) or die(mysql_error());
 			
 			$sqlab  = "select * from alianzen where tag='" . $allytag . "'";
 			$res    = mysql_query($sqlab);
 			$dsatz  = mysql_fetch_assoc($res);
 			
 			$sqlab 	= "update users set alianzid='" . $dsatz["id"] . "' where name='" . $_SESSION["user"] . "'";
-			mysql_query($sqlab);
+			mysql_query($sqlab) or die(mysql_error());
 			
 			$userhomeali = $dsatz["id"];
 			
@@ -188,7 +188,7 @@ else if($ac==2) {
 		echo "<td class='hsmallborder' align='center'>" . $dsatz["name"] . "</td>";
 		echo "<td class='hsmallborder' align='center'>" . $rang . "</td>";
 		echo "<td class='hsmallborder' align='center'>" . $position . "</td>";
-		echo "<td class='hsmallborder' align='center'>Punkte fehlen noch</td>";
+		echo "<td class='hsmallborder' align='center'>" . $dsatz["punkte"] ."</td>";
 		echo "<td class='hsmallborder' align='center'>";
 		if($dsatz["lastaction"]=='') {
 			echo "<font color='red'>OFF";
@@ -441,12 +441,14 @@ else if($ac==6) {
 				$ML   = false;
 				$RM   = false;
 				$AV   = false;
+				$RV   = false;
 				
 				if(isset($_POST["AA_" . $ids[$i]])) $AA = true;
 				if(isset($_POST["UK_" . $ids[$i]])) $UK = true;
 				if(isset($_POST["BW_" . $ids[$i]])) $BW = true;
 				if(isset($_POST["ML_" . $ids[$i]])) $ML = true;
 				if(isset($_POST["RM_" . $ids[$i]])) $RM = true;
+				if(isset($_POST['RV_' . $ids[$i]])) $RV = true;
 				if(isset($_POST["AV_" . $ids[$i]])) $AV = true;
 				
 				if($name=='') {
@@ -459,7 +461,7 @@ else if($ac==6) {
 						echo "<font color='red'>Rang namen bereits vorhanden.</font><br><br>";
 					}
 					else {
-						$sqlab = "update allyraenge set name='" . $name . "', AA='" . $AA . "', UK='" . $UK . "', BW='" . $BW . "', ML='" . $ML . "', RM='" . $RM . "', AV='" . $AV . "' where id='" . $ids[$i] . "'";
+						$sqlab = "update allyraenge set name='$name', AA='$AA', UK='$UK', BW='$BW', ML='$ML', RM='$RM', AV='$AV', RV='$RV' where id='" . $ids[$i] . "'";
 						mysql_query($sqlab);
 						
 						echo "<font color='green'>Recht erfolgreich beabreitet.</font><br><br>";
@@ -495,7 +497,7 @@ else if($ac==6) {
 	else {
 		#aus der db holen
 		echo "<tr><td class='hsmallborder' colspan='8' align='center'><b>Rechte konfigurieren</b></td></tr>";
-		echo "<tr><th class='hsmallborder'>&nbsp;</th><th class='hsmallborder'>Rang</th><th class='hsmallborder'>AA</th><th class='hsmallborder'>UK</th><th class='hsmallborder'>BW</th><th class='hsmallborder'>ML</th><th class='hsmallborder'>RM</th><th class='hsmallborder'>AV</th></tr>";
+		echo "<tr><th class='hsmallborder'>&nbsp;</th><th class='hsmallborder'>Rang</th><th class='hsmallborder'>AA</th><th class='hsmallborder'>UK</th><th class='hsmallborder'>BW</th><th class='hsmallborder'>ML</th><th class='hsmallborder'>RM</th><th class='hsmallborder'>RV</th><th class='hsmallborder'>AV</th></tr>";
 		$ids[0] = "";
 		$c = 0;
 		echo "<form action='main.php' method='post'>";
@@ -524,6 +526,10 @@ else if($ac==6) {
 			
 			echo "<td class='hsmallborder' align='center'><input type='checkbox' name='RM_" . $dsatz["id"] . "' ";
 			if($dsatz["RM"]==true) echo "checked ";
+			echo "</td>";
+			
+			echo "<td class='hsmallborder' align='center'><input type='checkbox' name='RV_" . $dsatz["id"] . "' ";
+			if($dsatz["RV"]==true) echo "checked ";
 			echo "</td>";
 			
 			echo "<td class='hsmallborder' align='center'><input type='checkbox' name='AV_" . $dsatz["id"] . "' ";
@@ -561,6 +567,8 @@ else if($ac==6) {
 	echo "<tr><td class='hsmallborder' align='center' width='20%'>BW</td><td class='hsmallborder' align='center'>Bewerbungen bearbetien und einsehen</td></tr>";
 	echo "<tr><td class='hsmallborder' align='center' width='20%'>ML</td><td class='hsmallborder' align='center'>Mitglieder sehen</td></tr>";
 	echo "<tr><td class='hsmallborder' align='center' width='20%'>RM</td><td class='hsmallborder' align='center'>Rund Nachricht schicken</td></tr>";
+	
+	echo "<tr><td class='hsmallborder' align='center' width='20%'>RV</td><td class='hsmallborder' align='center'>Rund Nachricht verwalten</td></tr>";
 	echo "<tr><td class='hsmallborder' align='center' width='20%'>AV</td><td class='hsmallborder' align='center'>Allianz verwalten</td></tr>";
 	echo "</table>";
 	
@@ -645,7 +653,7 @@ else if($ac==7) {
 		echo "<td class='hsmallborder' align='center'>" . $dsatz["name"] . "</td>";
 		echo "<td class='hsmallborder' align='center'>" . $rang . "</td>";
 		echo "<td class='hsmallborder' align='center'>" . $position . "</td>";
-		echo "<td class='hsmallborder' align='center'>Punkte fehlen noch</td>";
+		echo "<td class='hsmallborder' align='center'>" . $dsatz["punkte"] ."</td>";
 		echo "<td class='hsmallborder' align='center'>";
 		if($dsatz["lastaction"]=='') {
 			echo "<font color='red'>OFF";
@@ -1182,7 +1190,7 @@ else if($ac==14) {
 		$sqlab = "delete from bewerbungen where user='" . $_SESSION["user"] . "' LIMIT 1";
 		mysql_query($sqlab);
 		
-		echo "<font color='green'>Sie haben ihre bewerbung eroglreich zur&uuml;ckgezogen</font>";
+		echo "<font color='green'>Sie haben ihre bewerbung erfoglreich zur&uuml;ckgezogen</font>";
 	}
 }
 else if($ac==15) {
@@ -1330,6 +1338,10 @@ else if($userhomeali!=0&&$ac==0) {
 			if($dsatz3["AV"]) $allyverwaltung = true;
 			if($dsatz3["BW"]) $bewerbungenview = true;
 			if($dsatz3["AA"]) $allyaufloesen = true;
+			if($dsatz3["RM"]) $nachrichtenview = true;
+			if($dsatz3["RV"]) $nachrichtenverwalten = true;
+			
+			
 		}
 	}
 	
@@ -1338,6 +1350,10 @@ else if($userhomeali!=0&&$ac==0) {
 		$allyverwaltung	= true;
 		$bewerbungenview= true;
 		$allyaufloesen  = true;
+		$nachrichtenverwalten = true;
+		$nachrichtenview = true;
+		$_SESSION['RV'] = true;
+		
 	}
 	
 	echo "<h3>Ihre Allianz</h3>";
@@ -1352,6 +1368,21 @@ else if($userhomeali!=0&&$ac==0) {
 		echo " (<a style='text-decoration: none;' href='main.php?target=ally&ac=2'>Mitgliederliste</a>)";
 	}
 	echo "</td></tr>";
+	
+	echo "<tr><td class='hsmallborder' align='center' width='50%'>Nachrichten</td><td class='hsmallborder' align='center'>(";
+	if($nachrichtenview)
+	{
+		echo "<a style='text-decoration: none;' href='main.php?target=ally&ac=50'>Nachrichten lesen</a> / ";
+	}
+	else
+	{
+		echo "Nachrichten lesen";
+	}
+	if($nachrichtenverwalten)
+	{
+		echo "<a style='text-decoration: none;' href='main.php?target=ally&ac=51'>Nachrichten verwalten</a>";
+	}
+	echo ")</td></tr>";
 	echo "<tr><td class='hsmallborder' align='center' width='50%'>Rang</td><td class='hsmallborder' align='center'>" . $rang;
 	if($allyverwaltung) {
 		echo " (<a style='text-decoration: none;' href='main.php?target=ally&ac=3'>Allianz Verwalten</a>)";
@@ -1404,5 +1435,112 @@ else if($userhomeali!=0&&$ac==0) {
 		echo "<tr><td class='hsmallborder' align='center' colspan='2'><a style='text-decoration: none;' href='main.php?target=ally&ac=12'>Gr&uuml;nder recht &uuml;bergeben</a></td></tr>";
 	}
 	echo "</table>";
+}
+
+if($ac == 51)
+{
+	if($_SESSION['RV'] != true)
+	{
+		die("Kein zugang");
+	}
+	
+	$scac = $_GET['do'];
+	
+	if($scac == "clear")
+	{
+		if(isset($_GET['yes']))
+		{
+			$sql = ("DELETE FROM rundmails WHERE allyid='$userhomeali'");
+			mysql_query($sql) or die($sql." ".mysql_error());
+			echo "<font color=green>Alle Eintr&auml;ge gel&ouml;scht</font>";
+			echo "<br><a style='text-decoration: none;' href=main.php?target=ally&ac=50>Zur&uuml;ck</a>";
+			exit();
+		}
+		else
+		{
+			echo "<p>Sind Sie sicher, alle Nachrichten zu l&ouml;schen?</p>
+				<a style='text-decoration: none;' href=main.php?target=ally&ac=51&do=clear&yes>Ja</a><br>
+				<a style='text-decoration: none;' href=main.php?target=ally&ac=50>Nein</a>";
+		}
+	}
+}
+elseif($ac == 50)
+{
+	if($_SESSION['RV'] == true)
+	{
+		echo "<a style='text-decoration: none;' href=main.php?target=ally&ac=51&do=clear>Nachrichten l&ouml;schen</a>";
+	}
+	//echo "Nachrichten lesen";
+	if(isset($_GET['eintragen']))
+	{
+		$text = htmlentities($_POST['text']);
+		$text = mysql_real_escape_string($text);
+		
+		$sql = ("SELECT text FROM rundmails WHERE text='$text'");
+		$result = mysql_query($sql) or die(mysql_error());
+		if(mysql_num_rows($result) > 0)
+		{
+			$meldung = "<font color=red>Reload Sperre</font>";
+			die($meldung);
+		}
+		
+		if(!$meldung)
+		{
+			//userid rausfinden
+			$sql = ("SELECT id FROM users WHERE name='". $_SESSION['user'] ."'");
+			$result = mysql_query($sql) or die(mysql_error());
+			$row = mysql_fetch_array($result);
+			$userid = $row['id'];
+			
+			$sql = ("INSERT INTO rundmails (allyid,userid,text,datum) VALUES
+							('$userhomeali','$userid','$text',NOW())");
+			$result = mysql_query($sql) or die($sql . "<br>ERROR: ".mysql_error());
+			echo "<font color=green>Erfolgreich eingetragen</font>";
+			if($_SESSION["JavaScript"]==true) {
+				echo '<script language="JavaScript">location.href="main.php?target=ally&ac=50";';
+				echo '<' . "/" . 'script>';
+			}
+			else {
+				echo "<p><a href='main.php?target=ally&ac=50'>Hier gehst weiter</a></p>";
+			}
+		}
+	}
+	else
+	{
+		// Eingabe von Nachrichten
+		// HTML cOde
+		echo "
+			<form action=main.php?target=ally&ac=50&eintragen method=post>
+				<textarea name=text></textarea><br>
+				<input type=submit value=Eintragen>
+			</form>
+			<hr>
+		";
+		//Nachrichten anzeigen
+		$sql =("SELECT *,date_format(datum,'%d.%m.%Y um %H:%i:%S') AS datum FROM rundmails WHERE allyid='$userhomeali' ORDER BY datum DESC");
+		$result = mysql_query($sql) or die(mysql_error());
+		$anzahl = mysql_num_rows($result);
+		while($row = mysql_fetch_array($result))
+		{
+			$userid = $row['userid'];
+			$datum  = $row['datum'];
+			$text   = $row['text'];
+			
+			//echo "DEBUG :$userid<br>";
+			
+			// Username zu jeden rausfinden:
+			$sql1 = ("SELECT name FROM users WHERE id='$userid'");
+			$result1 = mysql_query($sql1) or die(mysql_error());
+			$row2 = mysql_fetch_array($result1);
+			$username = $row2['name'];
+			if(mysql_num_rows($result1) <= 0)
+			{
+				$username = "Gel&ouml;schte Spieler";
+			}
+			
+			echo "User: $username schrieb am: $datum<br>$text<hr>\n";
+		}
+		
+	}
 }
 ?>

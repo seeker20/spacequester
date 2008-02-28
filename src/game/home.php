@@ -83,6 +83,12 @@
 				
 				$umfang		= $dsatz["groesse"];
 				$einwohner	= $dsatz["einwohner"];
+				$eigentum   = $dsatz["eigentumer"];
+				
+				$sql = ("SELECT name FROM users WHERE id='$eigentum'");
+				$result = mysql_query($sql) or die(mysql_error());
+				$row = mysql_fetch_array($result);
+				$eigentumname = $row['name'];
 				
 			/*}
 			else {
@@ -99,6 +105,7 @@
 				echo "<tr><td>Gr&ouml;sse</td><td>:</td><td>" . $umfang . "</td></tr>";
 				echo "<tr><td>Einwohner</td><td>:</td><td>" . $einwohner . "</td></tr>";
 				echo "<tr><td>Position</td><td>:</td><td><a href='main.php?target=viewstar&pos=" . str_replace(":","-",$position) . "'>" . $position . "</a></td></tr>";
+				echo "<tr><td>Eigent&uuml;mer</td><td>:</td><td>$eigentumname</td></tr>";
 				echo "</table>";
 			echo "</div>";
 			echo "<br>";

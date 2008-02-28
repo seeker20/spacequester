@@ -1,18 +1,23 @@
 <table border='0' width='95%' style="height: 90%">
 	<?php
 	$sqlab 		= "select * from users where name='" . $_SESSION["user"] . "'";
-	$res   		= mysql_query($sqlab);
+	$res   		= mysql_query($sqlab) or die(mysql_error());
 	$dsatz 		= mysql_fetch_assoc($res);
 	
 	$credits	= $dsatz["credits"];
 	
 	$sqlab 	  = "select * from schiffe where id='" . $_SESSION["ship"] . "'";
-	$res      = mysql_query($sqlab);
+	$res      = mysql_query($sqlab) or die(mysql_error());
 	
 	$dsatz2   = mysql_fetch_assoc($res);
 	
-	$sqlab    = "select * from schiffe where userid='" . $dsatz["id"] . "' and x='" . $dsatz2["x"] . "' and y='" . $dsatz2["y"] . "' and sector='" . $dsatz2["sector"] . "'";
-	$res      = mysql_query($sqlab);
+	//$sqlab    = "select * from schiffe where userid='" . $dsatz["id"] . "' and x='" . $dsatz2["x"] . "' and y='" . $dsatz2["y"] . "' and sector='" . $dsatz2["sector"] . "'";
+	$sqlab = "SELECT * FROM schiffe WHERE userid='".$dsatz['id']."'";
+	//echo $sqlab;
+	$res      = mysql_query($sqlab) or die(mysql_error());
+	
+	//$anzahl = mysql_num_rows($res);
+	//echo "Anzahl: $anzahl";
 	
 	if(mysql_num_rows($res) > 1) {
 		$shiplist  = "<form name='changship' action='main.php' method='post'>";
@@ -23,7 +28,8 @@
 			$shiplist .= "<select name='ship'>";
 		}
 		$shiplist .= "<option value='" . $dsatz2["id"] . "'>" . $dsatz2["schiffsid"] . "</option>";
-		$shiplist .= "<option value='" . $dsatz2["id"] . "'>&nbsp;</option>";
+		$shiplist .= "<option value='" . $dsatz2["id"] . "'>-----------</option>";
+		//$shiplist .= "<option value='" . $dsatz2["id"] . "'>&nbsp;</option>";
 		while($dsatz3=mysql_fetch_assoc($res)) {
 			$shiplist .= "<option value='" . $dsatz3["id"] . "'>" . $dsatz3["schiffsid"] . "</option>";
 		}
@@ -36,11 +42,11 @@
 		$shiplist .= "<input type='hidden' name='shipswitch' value='1'>";
 		$shiplist .= "</form>";
 	}
-	else {
+	/*else {
 		$shiplist  = "<select name='ship'>";
 		$shiplist .= "<option>" . htmlentities($dsatz2["schiffsid"]) . "</option>";
 		$shiplist .= "</select>";
-	}
+	}*/
 	
 	$sqlab = "select * from schiffs_auftraege where schiffsid='" . $_SESSION["ship"] . "'";
 	$res   = mysql_query($sqlab);

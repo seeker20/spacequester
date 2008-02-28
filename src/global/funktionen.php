@@ -30,6 +30,20 @@ function generate_code($input)
 	return $schluessel;
 }
 
+function check_konto_owner($kontonummer,$userid)
+{
+	$sql = ("SELECT eigentum_id FROM konto WHERE kto_nr='$kontonummer' AND eigentum_id='$userid'");
+	$result = mysql_query($sql) or die(mysql_error());
+	if(mysql_num_rows($result) <= 0)
+	{
+		die("Diese Konto geh&ouml;rt dir nicht");
+	}
+	else
+	{
+		return true;
+	}
+}
+
 function sry()
 {
 	echo "Sorry Sie koennen sich nicht mehr registrieren";

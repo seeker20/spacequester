@@ -3,6 +3,8 @@
 <ul id="navlist">
 	<li><a href='main.php?target=home'>&Uuml;bersicht</a></li>
 	<li><a href='main.php?target=ship'>Raumschiff</a></li>
+    <li><a href='main.php?target=geld'>Geld</a></li>
+    <li><a href='main.php?target=bank'>Bank</a></li>
 	<li><a href='main.php?target=galaxy'>Galaxy</a></li>
 	<li><a href='main.php?target=plani'>Aktueller Planet</a></li>
 	<li><a href='main.php?target=ally'>Allianz</a></li>

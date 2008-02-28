@@ -1,6 +1,8 @@
 <?php
 #Session
 session_start();
+//echo $_SESSION['status'];
+
 ?>
           
 <?php

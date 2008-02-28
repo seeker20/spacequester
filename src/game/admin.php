@@ -41,6 +41,10 @@ if(!defined("ADMIN"))
 						case "news":
 							require("./admin/news.php");
 						break;
+						
+						case "db":
+							require("./admin/db.php");
+						break;
 					}
 				?>
 			</div>
@@ -74,6 +78,14 @@ if(!defined("ADMIN"))
 							<li><a href=main.php?target=admin&mtarget=news&id=3>News Resetten</a></li>
 						</ul>
 					</div>
+                    
+                <h4>Datenbank-system</h4>
+                	<div id=navcontainer>
+                    	<ul id=navlist>
+                       		<li><a href=main.php?target=admin&mtarget=db&id=1>Alle Tabellen Resetten</a></li>
+                            <li><a href=main.php?target=admin&mtarget=db&id=2>Alle Tabellen Optimieren</a></li>
+                        </ul>
+                    </div>
 			</div>
 		</td>
 </tr>

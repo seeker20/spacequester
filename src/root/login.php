@@ -120,24 +120,24 @@ if(isset($_GET["ac"])||isset($_POST["ac"])) {
 			include "../daten/ships/ships.php";
 			
 			$sqlab  = "select * from schiffe where userid='" . $_SESSION["usern"] . "'";
-			$res    = mysql_query($sqlab);
+			$res    = mysql_query($sqlab) or die(mysql_error());
 			if(mysql_num_rows($res) > 0) {
 				echo "Reload Sperre bitte laden sie diese Seite nicht neu.<br>";
 			}
 			else {
 				$sqlab  = "INSERT INTO `schiffe` ( `id` , `schiffsid` , `userid` , `schifstypid` , `schild` , `huelle` , `waffen` , `ausruestung` , `lager` , `x` , `y` , `sector` ) VALUES (";
 				$sqlab .= "NULL , 'No Name', '" . $_SESSION["usern"] . "', '" . $mod . "', '" . $ships[$mod][1] . "', '" . $ships[$mod][2] . "', '', '', '', '" . $x . "', '" . $y . "', '" . $galaxy . "')";
-				mysql_query($sqlab);
+				mysql_query($sqlab) or die(mysql_error());
 				
 				$sqlab  = "select * from schiffe where userid='" . $_SESSION["usern"] . "'";
-				$res    = mysql_query($sqlab);
+				$res    = mysql_query($sqlab) or die(mysql_error());
 				$dsatz  = mysql_fetch_assoc($res);
 			
 			
 				$time = time();
 			
 				$sqlab  = "update users set lastlogin='" . $date . "', lastaction='" . $time . "', schifid='" . $dsatz["id"] . "', credits='5000', beruf='" . $mod . "' where id='" . $_SESSION["usern"] . "'";
-				mysql_query($sqlab);
+				mysql_query($sqlab) or die(mysql_error());
 				
 				$sqlab  = "select * from users where id='" . $_SESSION["usern"] . "'";
 				$res    = mysql_query($sqlab);
@@ -150,6 +150,7 @@ if(isset($_GET["ac"])||isset($_POST["ac"])) {
 			if($_SESSION["JavaScript"]==true) {
 				echo '<script language="JavaScript">location.href="../game/main.php";';
 				echo '<' . "/" . 'script>';
+				//echo "<p><a href='../game/main.php'>Hier gehst weiter</a></p>";
 			}
 			else {
 				echo "<p><a href='../game/main.php'>Hier gehst weiter</a></p>";

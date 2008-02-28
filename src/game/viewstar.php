@@ -210,18 +210,36 @@ if(mysql_num_rows($res)>0) {
 	echo "<p>Sie Fliegen gerade.</p>";
 }
 else {
+	$position = $_GET['pos'];
+	#echo $position;
+	$position = explode("-",$position);
+	#echo "<br>$position";
+	$ox = mysql_real_escape_string($position[0]);
+	$oy = mysql_real_escape_string($position[1]);
+	$osector = mysql_real_escape_string($position[2]);
+	$sql = ("SELECT eigentumer FROM station WHERE x='$ox' AND y='$oy' AND sector='$osector'");
+	$result = mysql_query($sql) or die(mysql_error());
+	$row = mysql_fetch_array($result);
+	$eigentumerid = $row['eigentumer'];
+	
+	$sql = ("SELECT name FROM users WHERE id='$eigentumerid'");
+	$result = mysql_query($sql) or die(mysql_error());
+	$row = mysql_fetch_array($result);
+	$eigentumername = $row['name'];
+	//die($_SESSION['user']);
+	#echo "<br>X: $ox Y: $oy SEC: $osector";
 	echo '<div id="navcontainer">';
 	echo '<ul id="navlist">';
 	if($fieldtyp[$fieldida[1]][3]) {
 		echo "<li><a href='main.php?target=viewstar&pos=" . $tmpPos . "&ac=1'>Anfliegen</a></li>";
 	}
-	if($fieldtyp[$fieldida[1]][4]) {
+	if(($fieldtyp[$fieldida[1]][4]) && ($_SESSION['user'] != $eigentumername)) {
 		echo "<li><a href='main.php?target=viewstar&pos=" . $tmpPos . "&ac=2'>Handeln</a></li>";
 	}
-	if($fieldtyp[$fieldida[1]][5]) {
+	if(($fieldtyp[$fieldida[1]][5]) && ($_SESSION['user'] != $eigentumername)) {
 		echo "<li><a href='main.php?target=viewstar&pos=" . $tmpPos . "&ac=3'>Angreifen</a></li>";
 	}
-	if($fieldtyp[$fieldida[1]][6]) {
+	if(($fieldtyp[$fieldida[1]][6]) && ($_SESSION['user'] != $eigentumername)) {
 		echo "<li><a href='main.php?target=viewstar&pos=" . $tmpPos . "&ac=4'>Besetzen</a></li>";
 	}
 	echo '</ul>';

@@ -146,11 +146,11 @@ if($action == "registrierung")
 		$sql_register 		= ("INSERT INTO users (name,passwort,email,regdate,lastip,link) VALUES ('$name','$passwort','$email','$regi_dat','$ip','$link')");
 		
 		$text 	= "Wilkommen bei SpaceQuester,\r\n";
-		$text .= "Sie mssen nur noch auf den Volgenden link klicken und k&#246;nen dann sofort in ein\r\n";
+		$text .= "Sie müssen nur noch auf den Volgenden link klicken und können dann sofort in ein\r\n";
 		$text .= "intergalaktisches Abenteuer starten und Geschichte umschreiben. Einfach auf volgenden\r\n";
 		$text .= "link klicken und loslegen\r\n";
-		$text .= "http://" . $_SERVER["SERVER_NAME"] . str_replace("main.php","registrierung.php", $_SERVER["PHP_SELF"]) . "?action=aktive&email=$email&code=$link\r\n\r\n";
-		$text .= "Viel Spa&#223;in SpaceQuester w&#252;nscht ihnen ihr Admin Team";
+		$text .= "http://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"] . "?target=registrierung&action=aktive&email=$email&code=$link\r\n\r\n";
+		$text .= "Viel Spaß in SpaceQuester wünscht ihnen ihr Admin Team";
 		
 		$result_mail = mail($email,"Registrierung bei SpaceQuester",$text,"FROM: spacequester@fkrauthan.de");
 		if($result_mail == 0)

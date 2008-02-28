@@ -304,7 +304,7 @@ if($action == "write_mail")
 	$err = false;
 	$empfaenger = htmlentities($_POST['empfaenger']);
 	$betref     = htmlentities($_POST['betref']);
-	$text       = htmlentities($_POST['inhalt']);
+	$text       = nl2br(htmlentities($_POST['inhalt']));
 	$datum      = date("d.m.Y");
 
 	$empfaenger = mysql_real_escape_string($empfaenger);
